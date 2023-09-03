@@ -25,14 +25,14 @@ final class ServiceIndexResource extends NuGetResource {
   /// Retrieves the resources available on the package feed defined in
   /// [resourceUri].
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<ServiceIndexResponse> get() async {
     final response = await httpClient.get(resourceUri);
     return switch (response.statusCode) {
       200 => ServiceIndexResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetProtocolException('Failed to get service index: '
+      _ => throw NuGetServerException('Failed to get service index: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }

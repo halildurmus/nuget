@@ -25,7 +25,7 @@ final class PackageMetadataResource extends NuGetResource {
   ///
   /// Throws a [PackageNotFoundException] if the package does not exist.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<RegistrationIndexResponse> getRegistrationIndex(
     String packageId,
@@ -38,14 +38,14 @@ final class PackageMetadataResource extends NuGetResource {
       404 => throw PackageNotFoundException(packageId),
       200 => RegistrationIndexResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetProtocolException('Failed to get registration index: '
+      _ => throw NuGetServerException('Failed to get registration index: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }
 
   /// Retrieves the registration page for the specified [pageUrl].
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<RegistrationPageResponse> getRegistrationPage(String pageUrl) async {
     final uri = Uri.parse(pageUrl);
@@ -53,14 +53,14 @@ final class PackageMetadataResource extends NuGetResource {
     return switch (response.statusCode) {
       200 => RegistrationPageResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetProtocolException('Failed to get registration page: '
+      _ => throw NuGetServerException('Failed to get registration page: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }
 
   /// Retrieves the registration leaf for the specified [leafUrl].
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<RegistrationLeafResponse> getRegistrationLeaf(String leafUrl) async {
     final uri = Uri.parse(leafUrl);
@@ -68,7 +68,7 @@ final class PackageMetadataResource extends NuGetResource {
     return switch (response.statusCode) {
       200 => RegistrationLeafResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetProtocolException('Failed to get registration leaf: '
+      _ => throw NuGetServerException('Failed to get registration leaf: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }

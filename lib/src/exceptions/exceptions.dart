@@ -2,5 +2,5 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-export 'nuget_protocol_exception.dart';
+export 'nuget_server_exception.dart';
 export 'package_not_found_exception.dart';

@@ -6,7 +6,7 @@ issue_tracker: https://github.com/halildurmus/nuget/issues
 
 topics:
   - nuget
-  - nuget-protocol
+  - nuget-server-api
   - nuget-api
   - api
 

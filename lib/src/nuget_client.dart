@@ -9,14 +9,13 @@ import 'package:http/http.dart' as http;
 import 'exceptions/exceptions.dart';
 import 'resources/resources.dart';
 
-/// A client for the NuGet Protocol API.
+/// A client for the NuGet Server API.
 ///
-/// The NuGet Protocol API is a REST API that allows you to search for and
-/// download NuGet packages from a NuGet-compatible feed. The NuGet Protocol API
-/// is implemented by `NuGet.org` and other NuGet-compatible package
-/// repositories.
+/// The NuGet Server API is a set of HTTP endpoints that can be used to download
+/// packages, fetch metadata, and more.
 ///
-/// This client implements the NuGet Protocol API version `3.0.0`.
+/// The NuGet Server API is implemented by `NuGet.org` and other
+/// NuGet-compatible package repositories.
 ///
 /// See https://learn.microsoft.com/en-us/nuget/api/overview for more details.
 final class NuGetClient {
@@ -85,7 +84,7 @@ final class NuGetClient {
   /// Note: A package with only *unlisted* versions will not appear in the
   /// results.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<AutocompletePackageIdsResponse> autocompletePackageIds(
     String? query, {
@@ -110,7 +109,7 @@ final class NuGetClient {
   ///
   /// Note: A package version that is *unlisted* will not appear in the results.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<List<String>> autocompletePackageVersions(
     String packageId, {
@@ -130,7 +129,7 @@ final class NuGetClient {
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<Uint8List> downloadPackageContent(
     String packageId, {
@@ -147,7 +146,7 @@ final class NuGetClient {
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<Uint8List> downloadPackageManifest(
     String packageId, {
@@ -262,7 +261,7 @@ final class NuGetClient {
   ///
   /// Note: A package version that is *unlisted* will not appear in the results.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<List<String>> getPackageVersions(
     String packageId, {
@@ -305,7 +304,7 @@ final class NuGetClient {
   ///
   /// Note: An *unlisted* package should never appear in search results.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<SearchResponse> searchPackages(
     String? query, {

@@ -28,7 +28,7 @@ final class AutocompleteResource extends NuGetResource {
   /// Note: A package with only *unlisted* versions will not appear in the
   /// results.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<AutocompletePackageIdsResponse> autocompletePackageIds(
     String? query, {
@@ -56,7 +56,7 @@ final class AutocompleteResource extends NuGetResource {
     return switch (response.statusCode) {
       200 => AutocompletePackageIdsResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetProtocolException(
+      _ => throw NuGetServerException(
           'Failed to get autocomplete package Ids results: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
@@ -69,7 +69,7 @@ final class AutocompleteResource extends NuGetResource {
   ///
   /// Note: A package version that is *unlisted* will not appear in the results.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<List<String>> autocompletePackageVersions(
     String packageId, {
@@ -88,7 +88,7 @@ final class AutocompleteResource extends NuGetResource {
     return switch (response.statusCode) {
       200 =>
         (json.decode(response.body)['data'] as List<dynamic>).cast<String>(),
-      _ => throw NuGetProtocolException(
+      _ => throw NuGetServerException(
           'Failed to get autocomplete package versions results: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };

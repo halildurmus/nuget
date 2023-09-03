@@ -21,7 +21,7 @@ final class PackageContentResource extends NuGetResource {
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<Uint8List> downloadPackageContent(
     String packageId, {
@@ -38,7 +38,7 @@ final class PackageContentResource extends NuGetResource {
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
       200 => response.bodyBytes,
-      _ => throw NuGetProtocolException('Failed to download package content: '
+      _ => throw NuGetServerException('Failed to download package content: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }
@@ -49,7 +49,7 @@ final class PackageContentResource extends NuGetResource {
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<Uint8List> downloadPackageManifest(
     String packageId, {
@@ -62,7 +62,7 @@ final class PackageContentResource extends NuGetResource {
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
       200 => response.bodyBytes,
-      _ => throw NuGetProtocolException('Failed to download package manifest: '
+      _ => throw NuGetServerException('Failed to download package manifest: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }
@@ -74,7 +74,7 @@ final class PackageContentResource extends NuGetResource {
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<List<String>> getPackageVersions(String packageId) async {
     final id = packageId.toLowerCase();
@@ -85,7 +85,7 @@ final class PackageContentResource extends NuGetResource {
       404 => throw PackageNotFoundException(packageId),
       200 => (json.decode(response.body)['versions'] as List<dynamic>)
           .cast<String>(),
-      _ => throw NuGetProtocolException('Failed to get package versions: '
+      _ => throw NuGetServerException('Failed to get package versions: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }

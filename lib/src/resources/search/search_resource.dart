@@ -29,7 +29,7 @@ final class SearchResource extends NuGetResource {
   ///
   /// Note: An *unlisted* package should never appear in search results.
   ///
-  /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<SearchResponse> searchPackages(
     String? query, {
@@ -57,9 +57,8 @@ final class SearchResource extends NuGetResource {
     return switch (response.statusCode) {
       200 => SearchResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ =>
-        throw NuGetProtocolException('Failed to get search packages response: '
-            '${response.statusCode} ${response.reasonPhrase}'),
+      _ => throw NuGetServerException('Failed to get search packages response: '
+          '${response.statusCode} ${response.reasonPhrase}'),
     };
   }
 }

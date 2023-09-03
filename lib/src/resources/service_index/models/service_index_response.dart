@@ -93,7 +93,7 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
   Uri getRequiredResourceUri(List<String> types) {
     final resourceUri = getResourceUri(types);
     if (resourceUri == null) {
-      throw NuGetProtocolException(
+      throw NuGetServerException(
           'The service index does not have a resource named `${types.last}`.');
     }
 
