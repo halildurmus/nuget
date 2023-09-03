@@ -4,6 +4,12 @@ version: 0.1.0
 repository: https://github.com/halildurmus/nuget
 issue_tracker: https://github.com/halildurmus/nuget/issues
 
+topics:
+  - nuget
+  - nuget-protocol
+  - nuget-api
+  - api
+
 environment:
   sdk: ^3.1.0
 
