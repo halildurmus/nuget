@@ -6,10 +6,13 @@ import '../../exceptions/exceptions.dart';
 import '../nuget_resource.dart';
 import 'models/search_response.dart';
 
+/// The NuGet Search resource, used to search for packages.
+///
+/// See https://learn.microsoft.com/en-us/nuget/api/search-query-service-resource
 final class SearchResource extends NuGetResource {
   SearchResource({super.httpClient, required super.resourceUri});
 
-  /// Gets the packages that match the [query].
+  /// Retrieves the packages that match the [query].
   ///
   /// [includePrerelease] indicates whether to include pre-release packages in
   /// the results. Defaults to `false`.

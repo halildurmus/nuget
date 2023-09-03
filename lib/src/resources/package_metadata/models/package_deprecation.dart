@@ -3,7 +3,7 @@ import 'package_deprecation_reason.dart';
 
 /// A package's metadata.
 ///
-/// See https://docs.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-deprecation
+/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-deprecation
 final class PackageDeprecation {
   const PackageDeprecation({
     required this.reasons,

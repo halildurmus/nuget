@@ -3,7 +3,7 @@ import 'package_deprecation.dart';
 
 /// A package's metadata.
 ///
-/// See https://docs.microsoft.com/en-us/nuget/api/registration-base-url-resource#catalog-entry
+/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#catalog-entry
 final class CatalogEntry {
   const CatalogEntry({
     required this.catalogLeafUrl,

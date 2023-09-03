@@ -14,7 +14,7 @@ import 'resources/resources.dart';
 ///
 /// This client implements the NuGet Protocol API version `3.0.0`.
 ///
-/// See https://docs.microsoft.com/en-us/nuget/api/overview for more details.
+/// See https://learn.microsoft.com/en-us/nuget/api/overview for more details.
 final class NuGetClient {
   /// Initializes a new instance of [NuGetClient] class.
   ///
@@ -63,7 +63,7 @@ final class NuGetClient {
     _isInitialized = true;
   }
 
-  /// Gets the resource of type [T] from the [_resourceCache].
+  /// Retrieves the resource of type [T] from the [_resourceCache].
   T _getResource<T extends NuGetResource>() {
     assert(_isInitialized);
     if (_resourceCache.containsKey(T)) return _resourceCache[T] as T;
@@ -99,7 +99,7 @@ final class NuGetClient {
     );
   }
 
-  /// Retrieves the versions of the package with the [packageId].
+  /// Retrieves the package versions that match the [packageId].
   ///
   /// [includePrerelease] indicates whether to include pre-release versions in
   /// the results. Defaults to `false`.
@@ -121,7 +121,7 @@ final class NuGetClient {
   }
 
   /// Returns the contents of the package content (`.nupkg`) file for the
-  /// package with the [packageId] and [version] as a [Uint8List].
+  /// package with the [packageId] and [version].
   ///
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
@@ -138,7 +138,7 @@ final class NuGetClient {
   }
 
   /// Returns the contents of the package manifest (`.nuspec`) file for the
-  /// package with the [packageId] and [version] as a [Uint8List].
+  /// package with the [packageId] and [version].
   ///
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
@@ -288,7 +288,7 @@ final class NuGetClient {
     }
   }
 
-  /// Gets the packages that match the [query].
+  /// Retrieves the packages that match the [query].
   ///
   /// [includePrerelease] indicates whether to include pre-release packages in
   /// the results. Defaults to `false`.

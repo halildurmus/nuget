@@ -4,11 +4,11 @@ import '../../exceptions/exceptions.dart';
 import '../nuget_resource.dart';
 import 'models/service_index_response.dart';
 
-/// The NuGet Service Index client, used to discover other resources.
+/// The NuGet Service Index resource, used to discover other resources.
 ///
-/// See https://docs.microsoft.com/en-us/nuget/api/service-index
+/// See https://learn.microsoft.com/en-us/nuget/api/service-index
 final class ServiceIndexResource extends NuGetResource {
-  /// Creates a new [ServiceIndexResource] instance.
+  /// Creates a new instance of the [ServiceIndexResource] class.
   ///
   /// [resourceUri] defaults to [nugetOrgServiceIndex], which is the official
   /// `NuGet.org` service index.
@@ -18,7 +18,8 @@ final class ServiceIndexResource extends NuGetResource {
   static final nugetOrgServiceIndex =
       Uri.https('api.nuget.org', '/v3/index.json');
 
-  /// Gets the resources available on this package feed.
+  /// Retrieves the resources available on the package feed defined in
+  /// [resourceUri].
   ///
   /// Throws a [NuGetProtocolException] if the server returns a *non-200* status
   /// code.

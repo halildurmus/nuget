@@ -63,32 +63,40 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
     'SearchQueryService'
   ];
 
+  /// The resource [Uri] for the *Catalog* resource.
   Uri? get catalogResourceUri => getResourceUri(catalogTypes);
 
+  /// The resource [Uri] for the *Package Content* resource.
   Uri get packageContentResourceUri =>
-      getRequiredResourceUri(packageBaseAddressTypes, 'PackageBaseAddress');
+      getRequiredResourceUri(packageBaseAddressTypes);
 
+  /// The resource [Uri] for the *Package Metadata* resource.
   Uri get packageMetadataResourceUri =>
-      getRequiredResourceUri(registrationsBaseUrlTypes, 'RegistrationsBaseUrl');
+      getRequiredResourceUri(registrationsBaseUrlTypes);
 
+  /// The resource [Uri] for the *Search* resource.
   Uri get searchQueryResourceUri =>
-      getRequiredResourceUri(searchQueryServiceTypes, 'SearchQueryService');
+      getRequiredResourceUri(searchQueryServiceTypes);
 
+  /// The resource [Uri] for the *Autocomplete* resource.
   Uri? get searchAutocompleteResourceUri =>
       getResourceUri(searchAutocompleteServiceTypes);
 
-  // For more information on required resources,
-  // see https://docs.microsoft.com/en-us/nuget/api/overview#resources-and-schema
-  Uri getRequiredResourceUri(List<String> types, String resourceName) {
+  /// Retrieves the required resource [Uri] for the specified resource [types].
+  ///
+  /// For more information on required resources,
+  /// see https://learn.microsoft.com/en-us/nuget/api/overview#resources-and-schema
+  Uri getRequiredResourceUri(List<String> types) {
     final resourceUri = getResourceUri(types);
     if (resourceUri == null) {
       throw NuGetProtocolException(
-          'The service index does not have a resource named `$resourceName`.');
+          'The service index does not have a resource named `${types.last}`.');
     }
 
     return resourceUri;
   }
 
+  /// Retrieves the resource [Uri] for the specified resource [types].
   Uri? getResourceUri(List<String> types) {
     for (final type in types) {
       final resource = resources.where((r) => r.type == type).firstOrNull;

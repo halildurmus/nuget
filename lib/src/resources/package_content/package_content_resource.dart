@@ -4,11 +4,15 @@ import 'dart:typed_data';
 import '../../exceptions/exceptions.dart';
 import '../nuget_resource.dart';
 
+/// The NuGet Package Content resource, used to retrieve the contents of a
+/// package.
+///
+/// See https://learn.microsoft.com/en-us/nuget/api/package-base-address-resource
 final class PackageContentResource extends NuGetResource {
   PackageContentResource({super.httpClient, required super.resourceUri});
 
-  /// Returns the package content (`.nupkg`) for the [packageId] and [version]
-  /// as a [Uint8List].
+  /// Returns the contents of the package content (`.nupkg`) file for the
+  /// package with the [packageId] and [version].
   ///
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
@@ -35,8 +39,8 @@ final class PackageContentResource extends NuGetResource {
     };
   }
 
-  /// Returns the package manifest (`.nuspec`) for the [packageId] and [version]
-  /// as a [Uint8List].
+  /// Returns the contents of the package manifest (`.nuspec`) file for the
+  /// package with the [packageId] and [version].
   ///
   /// Throws a [PackageNotFoundException] if the server returns a *404* status
   /// code.
@@ -59,7 +63,7 @@ final class PackageContentResource extends NuGetResource {
     };
   }
 
-  /// Gets the all versions of the [packageId].
+  /// Retrieves the all versions of the [packageId].
   ///
   /// Note: This list contains both *listed* and *unlisted* package versions.
   ///

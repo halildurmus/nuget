@@ -1,4 +1,4 @@
-/// A resource in the `versions` List from `SearchEntry` class.
+/// A resource in the `versions` List from the `SearchEntry` class.
 ///
 /// See https://learn.microsoft.com/en-us/nuget/api/search-query-service-resource#search-result
 final class VersionItem {

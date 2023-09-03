@@ -6,10 +6,14 @@ import '../../exceptions/exceptions.dart';
 import '../nuget_resource.dart';
 import 'models/autocomplete_package_ids_response.dart';
 
+/// The NuGet Autocomplete resource, used to retrieve package ids and versions
+/// that match a query.
+///
+/// See https://learn.microsoft.com/en-us/nuget/api/search-autocomplete-service-resource
 final class AutocompleteResource extends NuGetResource {
   AutocompleteResource({super.httpClient, required super.resourceUri});
 
-  /// Gets the package ids that match the [query].
+  /// Retrieves the package ids that match the [query].
   ///
   /// [includePrerelease] indicates whether to include pre-release packages in
   /// the results. Defaults to `true`.
@@ -54,7 +58,7 @@ final class AutocompleteResource extends NuGetResource {
     };
   }
 
-  /// Gets the package versions for the [packageId].
+  /// Retrieves the package versions that match the [packageId].
   ///
   /// [includePrerelease] indicates whether to include pre-release versions in
   /// the results. Defaults to `true`.
