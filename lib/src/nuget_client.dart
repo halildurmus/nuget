@@ -9,20 +9,27 @@ import 'package:http/http.dart' as http;
 import 'exceptions/exceptions.dart';
 import 'resources/resources.dart';
 
-/// A client for the NuGet Server API.
+/// A client for interacting with the NuGet Server API.
 ///
-/// The NuGet Server API is a set of HTTP endpoints that can be used to download
-/// packages, fetch metadata, and more.
+/// The NuGet Server API provides a set of HTTP endpoints that enable various
+/// operations such as downloading packages, fetching metadata, and more.
 ///
-/// The NuGet Server API is implemented by `NuGet.org` and other
-/// NuGet-compatible package repositories.
+/// This client is designed to work with the NuGet Server API implemented by
+/// `NuGet.org` and other NuGet-compatible package repositories.
 ///
 /// See https://learn.microsoft.com/en-us/nuget/api/overview for more details.
 final class NuGetClient {
-  /// Initializes a new instance of [NuGetClient] class.
+  /// Initializes a new instance of the [NuGetClient] class.
   ///
-  /// [serviceIndexUri] represents the NuGet Service Index resource URI. By
-  /// default, [ServiceIndexResource.nugetOrgServiceIndex] is used.
+  /// The [httpClient] parameter allows you to provide a custom HTTP client.
+  /// If not provided, a default HTTP client will be created.
+  ///
+  /// The [serviceIndexUri] parameter represents the [Uri] of the NuGet Service
+  /// Index resource. By default, it uses the `NuGet.org`'s Service Index.
+  ///
+  /// It's important to close the [httpClient] when it's done being used;
+  /// failing to do so can cause the Dart process to hang. You can close the
+  /// [httpClient] by calling the [close] method.
   NuGetClient({http.Client? httpClient, Uri? serviceIndexUri})
       : _httpClient = httpClient ?? http.Client(),
         _serviceIndexUri =
@@ -324,7 +331,7 @@ final class NuGetClient {
 
   /// Closes the underlying HTTP client.
   ///
-  /// It's important to close each client when it's done being used; failing to
-  /// do so can cause the Dart process to hang.
+  /// It's important to close the HTTP client when it's done being used;
+  /// failing to do so can cause the Dart process to hang.
   void close() => _httpClient.close();
 }

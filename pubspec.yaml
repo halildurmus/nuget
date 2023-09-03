@@ -1,5 +1,5 @@
 name: nuget
-description: TODO
+description: A Dart package that allows interaction with the NuGet Server API.
 version: 0.1.0
 repository: https://github.com/halildurmus/nuget
 issue_tracker: https://github.com/halildurmus/nuget/issues

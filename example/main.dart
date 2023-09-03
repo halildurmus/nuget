@@ -8,13 +8,13 @@ void main() async {
   // Create an instance of NuGetClient
   final client = NuGetClient();
 
-  // Get latest package version
+  // Get the latest package version
   final latestVersion = await client.getLatestPackageVersion('Newtonsoft.Json');
   print('`Newtonsoft.Json` latest version: $latestVersion');
 
   print('');
 
-  // List package versions
+  // List all package versions
   final versions = await client.getPackageVersions('Newtonsoft.Json');
   print('`Newtonsoft.Json` has ${versions.length} versions:');
   for (final version in versions) {
@@ -23,7 +23,7 @@ void main() async {
 
   print('');
 
-  // Search packages
+  // Search for packages
   final searchResponse = await client.searchPackages('win32');
   print('The `win32` query returned ${searchResponse.totalHits} hits. Here are '
       'the first 20 results:');
@@ -33,7 +33,7 @@ void main() async {
 
   print('');
 
-  // Get package metadata
+  // Get the package metadata
   final metadata =
       await client.getPackageMetadata('Newtonsoft.Json', version: '13.0.3');
   print('`Newtonsoft.Json` metadata:');
@@ -43,16 +43,16 @@ void main() async {
 
   print('');
 
-  // Download a package content (.nupkg)
+  // Download the package content (.nupkg)
   final content =
       await client.downloadPackageContent('Newtonsoft.Json', version: '13.0.3');
   print('`Newtonsoft.Json` package size: ${content.length} bytes');
 
-  // Download a package manifest (.nuspec)
+  // Download the package manifest (.nuspec)
   final manifest = await client.downloadPackageManifest('Newtonsoft.Json',
       version: '13.0.3');
   print('`Newtonsoft.Json` manifest size: ${manifest.length} bytes');
 
-  // Close the client when you're done with it
+  // Don't forget to close the client when you're done with it
   client.close();
 }
