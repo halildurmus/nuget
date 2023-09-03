@@ -1,39 +1,39 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+[![ci][ci_badge]][ci_link]
+[![Package: nuget][package_badge]][package_link]
+[![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
+[![Language: Dart][language_badge]][language_link]
+[![License: BSD-3-Clause][license_badge]][license_link]
+[![codecov][codecov_badge_link]][codecov_link]
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+TODO
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+TODO
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+TODO
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+TODO
 
-```dart
-const like = 'sample';
-```
+## Feature requests and bugs
 
-## Additional information
+Please file feature requests and bugs at the
+[issue tracker][issue_tracker_link].
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+[ci_badge]: https://github.com/halildurmus/nuget/actions/workflows/dart.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/nuget/actions/workflows/dart.yml
+[codecov_badge_link]: https://codecov.io/gh/halildurums/nuget/branch/main/graph/badge.svg?token=XXX
+[codecov_link]: https://codecov.io/gh/halildurmus/nuget
+[issue_tracker_link]: https://github.com/halildurmus/nuget/issues
+[language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
+[language_link]: https://dart.dev
+[license_badge]: https://img.shields.io/github/license/halildurmus/nuget?color=blue
+[license_link]: https://opensource.org/licenses/BSD-3-Clause
+[package_badge]: https://img.shields.io/pub/v/nuget.svg
+[package_link]: https://pub.dev/packages/nuget
+[publisher_badge]: https://img.shields.io/pub/publisher/nuget.svg
+[publisher_link]: https://pub.dev/publishers/halildurmus.dev
