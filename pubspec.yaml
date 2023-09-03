@@ -2,6 +2,7 @@ name: nuget
 description: TODO
 version: 0.1.0
 repository: https://github.com/halildurmus/nuget
+issue_tracker: https://github.com/halildurmus/nuget/issues
 
 environment:
   sdk: ^3.1.0

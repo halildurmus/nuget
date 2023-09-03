@@ -59,7 +59,7 @@ final class CatalogEntry {
   final String? licenseUrl;
 
   /// Whether the package is listed in search results.
-  /// 
+  ///
   /// If `null`, the package should be considered as listed.
   final bool? listed;
 
