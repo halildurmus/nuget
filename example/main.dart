@@ -23,14 +23,6 @@ void main() async {
 
   print('');
 
-  // Check if a package exists
-  final result1 = await client.packageExists('Newtonsoft.Json');
-  print('`Newtonsoft.Json` exists: $result1');
-  final result2 = await client.packageExists('Newtonsoft.Json2');
-  print('`Newtonsoft.Json2` exists: $result2');
-
-  print('');
-
   // Search packages
   final searchResponse = await client.searchPackages('win32');
   print('The `win32` query returned ${searchResponse.totalHits} hits. Here are '
@@ -61,6 +53,6 @@ void main() async {
       version: '13.0.3');
   print('`Newtonsoft.Json` manifest size: ${manifest.length} bytes');
 
-  // Close the client when you're done
+  // Close the client when you're done with it
   client.close();
 }
