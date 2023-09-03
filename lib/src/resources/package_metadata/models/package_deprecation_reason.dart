@@ -1,3 +1,7 @@
+// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 /// Represents the reason why a package is deprecated.
 ///
 /// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-deprecation
