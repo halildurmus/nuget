@@ -5,13 +5,26 @@
 [![License: BSD-3-Clause][license_badge]][license_link]
 [![codecov][codecov_badge_link]][codecov_link]
 
-TODO
+A Dart package that allows interaction with the
+[NuGet Server API][nuget_server_api_link]. This package provides easy access to
+the `NuGet Server API`, allowing you to perform various operations such as
+querying package information, downloading package content, fetching package
+metadata, and more.
 
 ## Features
 
-TODO
+- [x] Autocomplete package IDs
+- [x] Autocomplete package versions
+- [x] Download package content (`.nupkg`)
+- [x] Download package manifest (`.nuspec`)
+- [x] Get all package metadata (all versions)
+- [x] Get latest package version
+- [x] Get package metadata (specific version)
+- [x] Get package versions
+- [x] Check if a package exists
+- [x] Search packages
 
-## Getting started
+## Usage
 
 TODO
 
