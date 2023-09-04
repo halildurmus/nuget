@@ -8,7 +8,7 @@ void main() async {
   // Create an instance of NuGetClient
   final client = NuGetClient();
 
-  // Get the latest package version
+  // Get latest package version
   final latestVersion = await client.getLatestPackageVersion('Newtonsoft.Json');
   print('`Newtonsoft.Json` latest version: $latestVersion');
 
@@ -33,7 +33,7 @@ void main() async {
 
   print('');
 
-  // Get the package metadata
+  // Get package metadata
   final metadata =
       await client.getPackageMetadata('Newtonsoft.Json', version: '13.0.3');
   print('`Newtonsoft.Json` metadata:');
@@ -43,12 +43,12 @@ void main() async {
 
   print('');
 
-  // Download the package content (.nupkg)
+  // Download package content (.nupkg)
   final content =
       await client.downloadPackageContent('Newtonsoft.Json', version: '13.0.3');
   print('`Newtonsoft.Json` package size: ${content.length} bytes');
 
-  // Download the package manifest (.nuspec)
+  // Download package manifest (.nuspec)
   final manifest = await client.downloadPackageManifest('Newtonsoft.Json',
       version: '13.0.3');
   print('`Newtonsoft.Json` manifest size: ${manifest.length} bytes');

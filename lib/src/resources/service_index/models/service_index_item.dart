@@ -9,7 +9,7 @@ final class ServiceIndexItem {
   const ServiceIndexItem({
     required this.resourceUrl,
     required this.type,
-    required this.comment,
+    this.comment,
   });
 
   /// The URL to the resource.

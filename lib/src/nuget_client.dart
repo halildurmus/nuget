@@ -171,7 +171,7 @@ final class NuGetClient {
   Future<List<CatalogEntry>> getAllPackageMetadata(String packageId) async {
     if (!_isInitialized) await _initialize();
     final resource = _getResource<PackageMetadataResource>();
-    final metadata = <CatalogEntry>[];
+    final catalogEntries = <CatalogEntry>[];
 
     final registrationIndex = await resource.getRegistrationIndex(packageId);
     for (final registrationIndexPage in registrationIndex.items) {
@@ -191,12 +191,12 @@ final class NuGetClient {
       }
 
       if (items != null) {
-        final packageMetadata = items.map((item) => item.catalogEntry);
-        metadata.addAll(packageMetadata);
+        final entries = items.map((item) => item.catalogEntry);
+        catalogEntries.addAll(entries);
       }
     }
 
-    return metadata;
+    return catalogEntries;
   }
 
   /// Retrieves the latest version of the package with the [packageId].

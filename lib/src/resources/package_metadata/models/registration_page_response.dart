@@ -7,14 +7,14 @@ import 'registration_index_page_item.dart';
 
 ///
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#registration-page
+/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#registration-page-object
 final class RegistrationPageResponse extends RegistrationIndexPage {
   RegistrationPageResponse({
     required super.registrationPageUrl,
     required super.count,
-    required super.items,
+    super.items,
     required super.lower,
-    required super.parent,
+    super.parent,
     required super.upper,
   });
 

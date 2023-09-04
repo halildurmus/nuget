@@ -78,13 +78,13 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
   Uri get packageMetadataResourceUri =>
       getRequiredResourceUri(registrationsBaseUrlTypes);
 
-  /// The resource [Uri] for the *Search* resource.
-  Uri get searchQueryResourceUri =>
-      getRequiredResourceUri(searchQueryServiceTypes);
-
   /// The resource [Uri] for the *Autocomplete* resource.
   Uri? get searchAutocompleteResourceUri =>
       getResourceUri(searchAutocompleteServiceTypes);
+
+  /// The resource [Uri] for the *Search* resource.
+  Uri get searchQueryResourceUri =>
+      getRequiredResourceUri(searchQueryServiceTypes);
 
   /// Retrieves the required resource [Uri] for the specified resource [types].
   ///

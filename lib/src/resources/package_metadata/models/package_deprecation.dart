@@ -11,8 +11,8 @@ import 'package_deprecation_reason.dart';
 final class PackageDeprecation {
   const PackageDeprecation({
     required this.reasons,
-    required this.message,
-    required this.alternatePackage,
+    this.message,
+    this.alternatePackage,
   });
 
   /// The reasons why the package was deprecated.

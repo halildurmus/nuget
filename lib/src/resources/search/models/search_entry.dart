@@ -12,18 +12,18 @@ final class SearchEntry {
     required this.packageId,
     required this.version,
     required this.versions,
-    required this.description,
+    this.description,
     required this.authors,
-    required this.iconUrl,
-    required this.licenseUrl,
-    required this.owners,
-    required this.projectUrl,
-    required this.registration,
-    required this.summary,
+    this.iconUrl,
+    this.licenseUrl,
+    this.owners,
+    this.projectUrl,
+    this.registration,
+    this.summary,
     required this.tags,
-    required this.title,
-    required this.totalDownloads,
-    required this.verified,
+    this.title,
+    this.totalDownloads,
+    this.verified,
   });
 
   /// The ID of the package.
@@ -87,9 +87,11 @@ final class SearchEntry {
           : (json['authors'] as List<dynamic>).cast<String>().join(',');
       final iconUrl = json['iconUrl'] as String?;
       final licenseUrl = json['licenseUrl'] as String?;
-      final owners = json['owners'] is String
-          ? json['owners'] as String
-          : (json['owners'] as List<dynamic>).cast<String>().join(',');
+      final owners = json['owners'] == null
+          ? null
+          : json['owners'] is String
+              ? json['owners'] as String
+              : (json['owners'] as List<dynamic>).cast<String>().join(',');
       final projectUrl = json['projectUrl'] as String?;
       final registration = json['registration'] as String?;
       final summary = json['summary'] as String?;

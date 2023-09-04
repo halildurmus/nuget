@@ -6,11 +6,7 @@
 ///
 /// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-dependency
 final class DependencyItem {
-  const DependencyItem({
-    required this.id,
-    required this.range,
-    required this.registration,
-  });
+  const DependencyItem({required this.id, this.range, this.registration});
 
   /// The ID of the package dependency.
   final String id;

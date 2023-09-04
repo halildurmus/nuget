@@ -8,10 +8,7 @@ import 'dependency_item.dart';
 ///
 /// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-dependency-group
 final class DependencyGroupItem {
-  const DependencyGroupItem({
-    required this.targetFramework,
-    required this.dependencies,
-  });
+  const DependencyGroupItem({this.targetFramework, this.dependencies});
 
   /// The target framework that these dependencies are applicable to.
   final String? targetFramework;

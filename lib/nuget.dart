@@ -33,7 +33,7 @@
 ///     print(' - ${package.packageId} (${package.version})');
 ///   }
 ///
-///   // Get the package metadata
+///   // Get package metadata
 ///   final metadata =
 ///       await client.getPackageMetadata('Newtonsoft.Json', version: '13.0.3');
 ///   print('`Newtonsoft.Json` metadata:');
@@ -41,7 +41,7 @@
 ///   print(' - Description: ${metadata.description}');
 ///   print(' - Author(s): ${metadata.authors}');
 ///
-///   // Download the package content (.nupkg)
+///   // Download package content (.nupkg)
 ///   final content = await client.downloadPackageContent('Newtonsoft.Json',
 ///       version: '13.0.3');
 ///   print('`Newtonsoft.Json` package size: ${content.length} bytes');

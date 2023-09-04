@@ -10,7 +10,7 @@ void main() async {
   group('NuGetClient', () {
     late NuGetClient client;
 
-    setUp(() => client = NuGetClient());
+    setUpAll(() => client = NuGetClient());
 
     group('autocompletePackageIds', () {
       test('includes pre-release packages in results', () async {
@@ -145,7 +145,9 @@ void main() async {
         )).throws<PackageNotFoundException>(
           it()
             ..has((e) => e.message, 'message')
-                .equals('Package `Non.Existent.Package` not found.'),
+                .equals('Package `Non.Existent.Package` not found.')
+            ..has((e) => e.toString(), 'toString').equals(
+                'PackageNotFoundException: Package `Non.Existent.Package` not found.'),
         );
       });
     });
@@ -186,9 +188,10 @@ void main() async {
     });
 
     group('getAllPackageMetadata', () {
-      test('returns metadata for all versions of a package', () async {
+      test('returns metadata for all versions of a package (1)', () async {
         final metadata =
             await client.getAllPackageMetadata('Microsoft.Win32.Registry');
+        check(metadata).isNotEmpty();
         check(metadata.map((m) => m.version)).which(it()
           ..length.isGreaterOrEqual(55)
           ..contains('4.0.0-beta-22231')
@@ -198,6 +201,21 @@ void main() async {
           ..contains('5.0.0-preview.1.20120.5')
           ..contains('5.0.0')
           ..contains('6.0.0-preview.1.21102.12'));
+      });
+
+      test('returns metadata for all versions of a package (2)', () async {
+        final metadata = await client.getAllPackageMetadata('Serilog');
+        check(metadata).isNotEmpty();
+        check(metadata.map((m) => m.version)).which(it()
+          ..length.isGreaterOrEqual(510)
+          ..contains('0.1.6')
+          ..contains('1.2.47')
+          ..contains('1.2.48')
+          ..contains('1.4.34')
+          ..contains('3.0.0-dev-01794')
+          ..contains('3.0.1')
+          ..contains('3.0.2-dev-02042')
+          ..contains('3.0.2-dev-02044'));
       });
 
       test('throws a PackageNotFoundException if the package does not exist',
@@ -250,35 +268,35 @@ void main() async {
           version: '5.0.0',
         );
         check(metadata)
-          ..has((m) => m.packageId, 'packageId')
+          ..has((e) => e.packageId, 'packageId')
               .equals('Microsoft.Win32.Registry')
-          ..has((m) => m.version, 'version').equals('5.0.0')
-          ..has((m) => m.authors, 'authors').equals('Microsoft')
-          ..has((m) => m.dependencyGroups, 'dependencyGroups')
+          ..has((e) => e.version, 'version').equals('5.0.0')
+          ..has((e) => e.authors, 'authors').equals('Microsoft')
+          ..has((e) => e.dependencyGroups, 'dependencyGroups')
               .isNotNull()
               .which(it()..length.equals(13))
-          ..has((m) => m.deprecation, 'deprecation').isNull()
-          ..has((m) => m.description, 'description').isNotNull().contains(
+          ..has((e) => e.deprecation, 'deprecation').isNull()
+          ..has((e) => e.description, 'description').isNotNull().contains(
               'Provides support for accessing and modifying the Windows Registry.')
-          ..has((m) => m.language, 'language').isNotNull().isEmpty()
-          ..has((m) => m.minClientVersion, 'minClientVersion')
+          ..has((e) => e.language, 'language').isNotNull().isEmpty()
+          ..has((e) => e.minClientVersion, 'minClientVersion')
               .isNotNull()
               .equals('2.12')
-          ..has((m) => m.summary, 'summary').isNotNull().isEmpty()
-          ..has((m) => m.tags, 'tags').isNotNull().isEmpty()
-          ..has((m) => m.isListed, 'isListed').isTrue()
-          ..has((m) => m.title, 'title')
+          ..has((e) => e.summary, 'summary').isNotNull().isEmpty()
+          ..has((e) => e.tags, 'tags').isNotNull().isEmpty()
+          ..has((e) => e.isListed, 'isListed').isTrue()
+          ..has((e) => e.title, 'title')
               .isNotNull()
               .equals('Microsoft.Win32.Registry')
-          ..has((m) => m.iconUrl, 'iconUrl').equals(
+          ..has((e) => e.iconUrl, 'iconUrl').equals(
               'https://api.nuget.org/v3-flatcontainer/microsoft.win32.registry/5.0.0/icon')
-          ..has((m) => m.licenseUrl, 'licenseUrl').equals(
+          ..has((e) => e.licenseUrl, 'licenseUrl').equals(
               'https://www.nuget.org/packages/Microsoft.Win32.Registry/5.0.0/license')
-          ..has((m) => m.packageContentUrl, 'packageContentUrl').equals(
+          ..has((e) => e.packageContentUrl, 'packageContentUrl').equals(
               'https://api.nuget.org/v3-flatcontainer/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg')
-          ..has((m) => m.projectUrl, 'projectUrl')
+          ..has((e) => e.projectUrl, 'projectUrl')
               .equals('https://github.com/dotnet/runtime')
-          ..has((m) => m.requireLicenseAcceptance, 'requireLicenseAcceptance')
+          ..has((e) => e.requireLicenseAcceptance, 'requireLicenseAcceptance')
               .isNotNull()
               .isFalse();
       });
@@ -292,6 +310,19 @@ void main() async {
           it()
             ..has((e) => e.message, 'message')
                 .equals('Package `Non.Existent.Package` not found.'),
+        );
+      });
+
+      test(
+          'throws a PackageNotFoundException if the package with the specified version does not exist',
+          () async {
+        await check(client.getPackageMetadata(
+          'Microsoft.Win32.Registry',
+          version: '0.1.0',
+        )).throws<PackageNotFoundException>(
+          it()
+            ..has((e) => e.message, 'message').equals(
+                'Package `Microsoft.Win32.Registry` (0.1.0) not found.'),
         );
       });
     });
@@ -340,9 +371,26 @@ void main() async {
             .completes(it()..isTrue());
       });
 
+      test('returns true if the package with the specified version exists',
+          () async {
+        await check(client.packageExists(
+          'Microsoft.Win32.Registry',
+          version: '5.0.0',
+        )).completes(it()..isTrue());
+      });
+
       test('returns false if the package does not exist', () async {
         await check(client.packageExists('Non.Existent.Package'))
             .completes(it()..isFalse());
+      });
+
+      test(
+          'returns false if the package with the specified version does not exist',
+          () async {
+        await check(client.packageExists(
+          'Microsoft.Win32.Registry',
+          version: '0.1.0',
+        )).completes(it()..isFalse());
       });
     });
 
@@ -351,6 +399,7 @@ void main() async {
         final response =
             await client.searchPackages('win32', includePrerelease: true);
         check(response.totalHits).isGreaterOrEqual(250);
+        check(response.data).isNotEmpty();
         check(response.data.map((pkg) => pkg.packageId)).which(it()
           ..length.equals(20)
           ..contains('Win32')
@@ -362,6 +411,7 @@ void main() async {
         final response =
             await client.searchPackages('win32', includePrerelease: false);
         check(response.totalHits).isGreaterOrEqual(250);
+        check(response.data).isNotEmpty();
         check(response.data.map((pkg) => pkg.packageId)).which(it()
           ..length.equals(20)
           ..contains('Win32')
@@ -375,6 +425,7 @@ void main() async {
         final response = await client.searchPackages('win32',
             includePrerelease: true, skip: 1, take: 10);
         check(response.totalHits).isGreaterOrEqual(250);
+        check(response.data).isNotEmpty();
         check(response.data.map((pkg) => pkg.packageId)).which(it()
           ..length.equals(10)
           ..contains('Win32')
@@ -388,6 +439,7 @@ void main() async {
         final response = await client.searchPackages('win32',
             includePrerelease: false, skip: 0, take: 50);
         check(response.totalHits).isGreaterOrEqual(250);
+        check(response.data).isNotEmpty();
         check(response.data.map((pkg) => pkg.packageId)).which(it()
           ..length.equals(50)
           ..contains('Win32')
@@ -410,6 +462,6 @@ void main() async {
       });
     });
 
-    tearDown(() => client.close());
+    tearDownAll(() => client.close());
   });
 }

@@ -10,7 +10,7 @@ final class PackageNotFoundException implements Exception {
   final String? packageVersion;
 
   String get message => packageVersion != null
-      ? 'Package `$packageId` v$packageVersion not found.'
+      ? 'Package `$packageId` ($packageVersion) not found.'
       : 'Package `$packageId` not found.';
 
   @override

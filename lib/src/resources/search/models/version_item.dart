@@ -12,7 +12,7 @@ final class VersionItem {
     required this.downloads,
   });
 
-  /// The absolute URL to the associated registration leaf
+  /// The absolute URL to the associated registration leaf.
   final String registrationLeafUrl;
 
   /// The full SemVer 2.0.0 version string of the package (could contain build

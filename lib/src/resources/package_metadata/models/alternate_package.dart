@@ -6,7 +6,7 @@
 ///
 /// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#alternate-package
 final class AlternatePackage {
-  const AlternatePackage({required this.id, required this.range});
+  const AlternatePackage({required this.id, this.range});
 
   /// The ID of the alternate package.
   final String id;

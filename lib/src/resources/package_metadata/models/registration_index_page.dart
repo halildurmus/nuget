@@ -13,7 +13,7 @@ class RegistrationIndexPage {
     required this.count,
     required this.items,
     required this.lower,
-    required this.parent,
+    this.parent,
     required this.upper,
   });
 

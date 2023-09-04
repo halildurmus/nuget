@@ -7,6 +7,7 @@ export 'models/catalog_entry.dart';
 export 'models/dependency_group_item.dart';
 export 'models/dependency_item.dart';
 export 'models/package_deprecation.dart';
+export 'models/package_deprecation_reason.dart';
 export 'models/registration_index_page.dart';
 export 'models/registration_index_page_item.dart';
 export 'models/registration_index_response.dart';
