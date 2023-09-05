@@ -4,10 +4,10 @@
 
 import 'search_entry.dart';
 
-/// Represents the JSON response from the Search Resource's
-/// `Search for packages` API.
+/// Represents the response from the Search Resource's `Search for packages`
+/// API.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/search-query-service-resource#response
+/// See https://learn.microsoft.com/nuget/api/search-query-service-resource#response
 final class SearchResponse {
   const SearchResponse({required this.totalHits, required this.data});
 

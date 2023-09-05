@@ -6,7 +6,7 @@ import 'catalog_entry.dart';
 
 /// A resource in the `items` List from the `RegistrationIndexPage` class.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#registration-leaf-object-in-a-page
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#registration-leaf-object-in-a-page
 class RegistrationIndexPageItem {
   RegistrationIndexPageItem({
     required this.registrationLeafUrl,
@@ -20,7 +20,7 @@ class RegistrationIndexPageItem {
   /// The catalog entry containing the package metadata.
   final CatalogEntry catalogEntry;
 
-  /// The URL to the package content (.nupkg).
+  /// The URL to the package content (`.nupkg`).
   final String packageContent;
 
   factory RegistrationIndexPageItem.fromJson(Map<String, dynamic> json) {

@@ -6,7 +6,7 @@ import 'version_item.dart';
 
 /// A resource in the `data` List from the `SearchResponse` class.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/search-query-service-resource#search-result
+/// See https://learn.microsoft.com/nuget/api/search-query-service-resource#search-result
 final class SearchEntry {
   const SearchEntry({
     required this.packageId,

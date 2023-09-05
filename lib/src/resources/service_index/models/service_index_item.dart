@@ -4,7 +4,7 @@
 
 /// A resource in the `resources` List from the `ServiceIndexResponse` class.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/service-index#resources
+/// See https://learn.microsoft.com/nuget/api/service-index#resources
 final class ServiceIndexItem {
   const ServiceIndexItem({
     required this.resourceUrl,

@@ -4,7 +4,7 @@
 
 /// A resource in the `versions` List from the `SearchEntry` class.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/search-query-service-resource#search-result
+/// See https://learn.microsoft.com/nuget/api/search-query-service-resource#search-result
 final class VersionItem {
   const VersionItem({
     required this.registrationLeafUrl,

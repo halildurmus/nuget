@@ -17,7 +17,7 @@ import 'resources/resources.dart';
 /// This client is designed to work with the NuGet Server API implemented by
 /// `NuGet.org` and other NuGet-compatible package repositories.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/overview for more details.
+/// See https://learn.microsoft.com/nuget/api/overview for more details.
 final class NuGetClient {
   /// Initializes a new instance of the [NuGetClient] class.
   ///
@@ -77,16 +77,19 @@ final class NuGetClient {
   T _getResource<T extends NuGetResource>() {
     assert(_isInitialized);
     if (_resourceCache.containsKey(T)) return _resourceCache[T] as T;
-    throw StateError('Resource $T not found');
+    throw StateError('Resource `$T` not found.');
   }
 
-  /// Retrieves the package ids that match the [query].
+  /// Retrieves the package IDs that match the [query].
   ///
-  /// [includePrerelease] indicates whether to include pre-release packages in
+  /// [includePrerelease] indicates whether to include *pre-release* packages in
   /// the results. Defaults to `false`.
   ///
-  /// [skip] and [take] parameters are used for pagination. [skip] must be
-  /// greater than or equal to `0`. [take] must be greater than `0`.
+  /// [skip] represents the number of results to skip, for pagination. It must
+  /// be greater than or equal to `0`.
+  ///
+  /// [take] represents the number of results to return, for pagination. It must
+  /// be greater than `0`.
   ///
   /// Note: A package with only *unlisted* versions will not appear in the
   /// results.
@@ -106,27 +109,6 @@ final class NuGetClient {
       includePrerelease: includePrerelease,
       skip: skip,
       take: take,
-    );
-  }
-
-  /// Retrieves the package versions that match the [packageId].
-  ///
-  /// [includePrerelease] indicates whether to include pre-release versions in
-  /// the results. Defaults to `false`.
-  ///
-  /// Note: A package version that is *unlisted* will not appear in the results.
-  ///
-  /// Throws a [NuGetServerException] if the server returns a *non-200* status
-  /// code.
-  Future<List<String>> autocompletePackageVersions(
-    String packageId, {
-    bool includePrerelease = false,
-  }) async {
-    if (!_isInitialized) await _initialize();
-    final resource = _getResource<AutocompleteResource>();
-    return await resource.autocompletePackageVersions(
-      packageId,
-      includePrerelease: includePrerelease,
     );
   }
 
@@ -166,8 +148,10 @@ final class NuGetClient {
 
   /// Returns the metadata for all versions of the package with the [packageId].
   ///
-  /// Throws a [PackageNotFoundException] if the package with the [packageId]
-  /// does not exist.
+  /// Throws a [PackageNotFoundException] if the package does not exist.
+  ///
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
+  /// code.
   Future<List<CatalogEntry>> getAllPackageMetadata(String packageId) async {
     if (!_isInitialized) await _initialize();
     final resource = _getResource<PackageMetadataResource>();
@@ -175,18 +159,16 @@ final class NuGetClient {
 
     final registrationIndex = await resource.getRegistrationIndex(packageId);
     for (final registrationIndexPage in registrationIndex.items) {
-      // If the package's registration index is too big, it will be split into
-      // registration pages stored at different URLs. We will need to fetch each
-      // page's items individually. We can detect this case as the registration
-      // index will have "null" items.
+      // If the package's registration index is too large, it will be divided
+      // into separate registration pages stored at different URLs. In such
+      // cases, we will need to fetch the items from each page individually.
+      // You can identify this scenario when the registration index contains
+      // `null` items.
       var items = registrationIndexPage.items;
       if (items == null) {
         final externalRegistrationPage = await resource
             .getRegistrationPage(registrationIndexPage.registrationPageUrl);
-
-        // Skip malformed external pages.
         if (externalRegistrationPage.items == null) continue;
-
         items = externalRegistrationPage.items;
       }
 
@@ -201,25 +183,31 @@ final class NuGetClient {
 
   /// Retrieves the latest version of the package with the [packageId].
   ///
-  /// [includePrerelease] indicates whether to include pre-release version in
+  /// [includePrerelease] indicates whether to include *pre-release* version in
   /// the result. Defaults to `false`.
+  ///
+  /// Throws a [PackageNotFoundException] if the package does not exist.
+  ///
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
+  /// code.
   Future<String> getLatestPackageVersion(
     String packageId, {
     bool includePrerelease = false,
   }) async {
-    if (!_isInitialized) await _initialize();
-    final response = await searchPackages('packageid:$packageId',
+    final versions = await getPackageVersions(packageId,
         includePrerelease: includePrerelease);
-    final package = response.data.firstOrNull;
-    if (package != null) return package.version;
-    throw PackageNotFoundException(packageId);
+    return switch (versions) {
+      [..., final version] => version,
+      _ => throw PackageNotFoundException(packageId),
+    };
   }
 
-  /// Retrieves the metadata for the package with the [packageId] and
-  /// [version].
+  /// Retrieves the metadata for the package with the [packageId] and [version].
   ///
-  /// Throws a [PackageNotFoundException] if the package with the [packageId]
-  /// and [version] does not exist.
+  /// Throws a [PackageNotFoundException] if the package does not exist.
+  ///
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
+  /// code.
   Future<CatalogEntry> getPackageMetadata(
     String packageId, {
     required String version,
@@ -229,31 +217,28 @@ final class NuGetClient {
     final registrationIndex = await resource.getRegistrationIndex(packageId);
 
     for (final registrationIndexPage in registrationIndex.items) {
-      // Skip pages that do not contain the desired package version.
+      // Skip pages that do not contain the desired package version
       final RegistrationIndexPage(:lower, :upper) = registrationIndexPage;
       if (lower.compareTo(version) > 0) continue;
       if (upper.compareTo(version) < 0) continue;
 
-      // If the package's registration index is too big, it will be split into
-      // registration pages stored at different URLs. We will need to fetch each
-      // page's items individually. We can detect this case as the registration
-      // index will have "null" items.
+      // If the package's registration index is too large, it will be divided
+      // into separate registration pages stored at different URLs. In such
+      // cases, we will need to fetch the items from each page individually.
+      // You can identify this scenario when the registration index contains
+      // `null` items.
       var items = registrationIndexPage.items;
       if (items == null) {
         final externalRegistrationPage = await resource
             .getRegistrationPage(registrationIndexPage.registrationPageUrl);
-
-        // Skip malformed external pages.
         if (externalRegistrationPage.items == null) continue;
-
         items = externalRegistrationPage.items;
       }
 
-      // We've found the registration items that should cover the desired
-      // package.
       final result = items
           ?.where((item) => item.catalogEntry.version == version)
           .firstOrNull;
+      // We've found the metadata for the desired version
       if (result != null) return result.catalogEntry;
     }
 
@@ -263,10 +248,12 @@ final class NuGetClient {
 
   /// Retrieves the versions of the package with the [packageId].
   ///
-  /// [includePrerelease] indicates whether to include pre-release versions in
-  /// the results. Defaults to `true`.
+  /// [includePrerelease] indicates whether to include *pre-release* versions in
+  /// the results. Defaults to `false`.
   ///
   /// Note: A package version that is *unlisted* will not appear in the results.
+  ///
+  /// Returns an empty list if the package does not exist.
   ///
   /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
@@ -284,8 +271,11 @@ final class NuGetClient {
 
   /// Determines whether the package with the [packageId] exists.
   ///
-  /// If [version] is specified, it also checks whether the package with the
-  /// [packageId] and [version] exists.
+  /// If [version] is specified, it also checks whether the package has the
+  /// specified [version].
+  ///
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
+  /// code.
   Future<bool> packageExists(String packageId, {String? version}) async {
     if (!_isInitialized) await _initialize();
     try {
@@ -300,11 +290,14 @@ final class NuGetClient {
 
   /// Retrieves the packages that match the [query].
   ///
-  /// [includePrerelease] indicates whether to include pre-release packages in
+  /// [includePrerelease] indicates whether to include *pre-release* packages in
   /// the results. Defaults to `false`.
   ///
-  /// [skip] and [take] parameters are used for pagination. [skip] must be
-  /// greater than or equal to `0`. [take] must be greater than `0`.
+  /// [skip] represents the number of results to skip, for pagination. It must
+  /// be greater than or equal to `0`.
+  ///
+  /// [take] represents the number of results to return, for pagination. It must
+  /// be greater than `0`.
   ///
   /// Note: `NuGet.org` limits the [skip] parameter to *3,000* and the [take]
   /// parameter to *1,000*.

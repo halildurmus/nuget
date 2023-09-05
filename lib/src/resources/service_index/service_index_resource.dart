@@ -10,7 +10,7 @@ import 'models/service_index_response.dart';
 
 /// The NuGet Service Index resource, used to discover other resources.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/service-index
+/// See https://learn.microsoft.com/nuget/api/service-index
 final class ServiceIndexResource extends NuGetResource {
   /// Creates a new instance of the [ServiceIndexResource] class.
   ///

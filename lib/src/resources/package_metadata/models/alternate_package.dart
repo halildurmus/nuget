@@ -4,7 +4,7 @@
 
 /// The alternate package that should be used instead of a deprecated package.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#alternate-package
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#alternate-package
 final class AlternatePackage {
   const AlternatePackage({required this.id, this.range});
 

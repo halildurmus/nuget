@@ -4,7 +4,7 @@
 
 /// Represents a package dependency.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-dependency
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#package-dependency
 final class DependencyItem {
   const DependencyItem({required this.id, this.range, this.registration});
 

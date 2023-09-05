@@ -7,10 +7,9 @@ import 'package:version/version.dart';
 import '../../../exceptions/exceptions.dart';
 import 'service_index_item.dart';
 
-/// The entry point for a NuGet package source and allows a client
-/// implementation to discover the package source's capabilities.
+/// Represents the response from the Service Index resource.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/service-index
+/// See https://learn.microsoft.com/nuget/api/service-index
 final class ServiceIndexResponse {
   const ServiceIndexResponse({required this.version, required this.resources});
 
@@ -89,7 +88,7 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
   /// Retrieves the required resource [Uri] for the specified resource [types].
   ///
   /// For more information on required resources,
-  /// see https://learn.microsoft.com/en-us/nuget/api/overview#resources-and-schema
+  /// see https://learn.microsoft.com/nuget/api/overview#resources-and-schema
   Uri getRequiredResourceUri(List<String> types) {
     final resourceUri = getResourceUri(types);
     if (resourceUri == null) {
