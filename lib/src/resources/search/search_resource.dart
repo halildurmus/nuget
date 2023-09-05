@@ -12,17 +12,20 @@ import 'models/search_response.dart';
 
 /// The NuGet Search resource, used to search for packages.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/search-query-service-resource
+/// See https://learn.microsoft.com/nuget/api/search-query-service-resource
 final class SearchResource extends NuGetResource {
   SearchResource({super.httpClient, required super.resourceUri});
 
   /// Retrieves the packages that match the [query].
   ///
-  /// [includePrerelease] indicates whether to include pre-release packages in
+  /// [includePrerelease] indicates whether to include *pre-release* packages in
   /// the results. Defaults to `false`.
   ///
-  /// [skip] and [take] parameters are used for pagination. [skip] must be
-  /// greater than or equal to `0`. [take] must be greater than `0`.
+  /// [skip] represents the number of results to skip, for pagination. It must
+  /// be greater than or equal to `0`.
+  ///
+  /// [take] represents the number of results to return, for pagination. It must
+  /// be greater than `0`.
   ///
   /// Note: `NuGet.org` limits the [skip] parameter to *3,000* and the [take]
   /// parameter to *1,000*.

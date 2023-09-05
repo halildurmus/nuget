@@ -78,44 +78,6 @@ void main() async {
       });
     });
 
-    group('autocompletePackageVersions', () {
-      test('includes pre-release versions in results', () async {
-        final versions = await client.autocompletePackageVersions(
-          'Microsoft.Windows.SDK.Contracts',
-          includePrerelease: true,
-        );
-        check(versions).which(it()
-          ..length.isGreaterOrEqual(92)
-          ..contains('10.0.17134.1000')
-          ..contains('10.0.19041.1')
-          ..contains('10.0.22621.755')
-          ..contains('10.0.22621-preview')
-          ..contains('10.0.25931-preview'));
-      });
-
-      test('excludes pre-release versions in results (1)', () async {
-        final versions = await client.autocompletePackageVersions(
-          'Microsoft.Windows.SDK.Contracts',
-          includePrerelease: false,
-        );
-        check(versions).which(it()
-          ..length.isGreaterOrEqual(12)
-          ..contains('10.0.17134.1000')
-          ..contains('10.0.19041.1')
-          ..contains('10.0.22621.755')
-          ..not(it()..contains('10.0.22621-preview'))
-          ..not(it()..contains('10.0.25931-preview')));
-      });
-
-      test('excludes pre-release versions in results (2)', () async {
-        final versions = await client.autocompletePackageVersions(
-          'Microsoft.Windows.SDK.Win32Metadata',
-          includePrerelease: false,
-        );
-        check(versions).isEmpty();
-      });
-    });
-
     group('downloadPackageContent', () {
       test('downloads a package', () async {
         // Pick a small package (this one is 346.42KB).

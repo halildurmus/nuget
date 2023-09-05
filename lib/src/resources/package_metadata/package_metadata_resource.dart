@@ -13,15 +13,11 @@ import 'models/registration_page_response.dart';
 /// The NuGet Package Metadata resource, used to retrieve metadata about
 /// packages.
 ///
-/// Note: [PackageMetadataResource] does not contain all metadata for packages.
-/// Use the `SearchResource` to find packages' owners, downloads, or prefix
-/// reservation status.
-///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource
 final class PackageMetadataResource extends NuGetResource {
   PackageMetadataResource({super.httpClient, required super.resourceUri});
 
-  /// Retrieves the registration index for the specified [packageId].
+  /// Retrieves the registration index for the package with the [packageId].
   ///
   /// Throws a [PackageNotFoundException] if the package does not exist.
   ///

@@ -4,9 +4,9 @@
 
 import 'registration_index_page.dart';
 
+/// The response from the registration index.
 ///
-///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#response
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#response
 class RegistrationIndexResponse {
   RegistrationIndexResponse({required this.count, required this.items});
 

@@ -6,7 +6,7 @@ import 'registration_index_page_item.dart';
 
 /// A resource in the `items` List from the `RegistrationIndexResponse` class.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#registration-page-object
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#registration-page-object
 class RegistrationIndexPage {
   RegistrationIndexPage({
     required this.registrationPageUrl,
@@ -29,7 +29,7 @@ class RegistrationIndexPage {
   /// The lowest SemVer 2.0.0 version in the page (inclusive).
   final String lower;
 
-  /// The URL to the registration index
+  /// The URL to the registration index.
   final String? parent;
 
   /// The highest SemVer 2.0.0 version in the page (inclusive).

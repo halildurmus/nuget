@@ -4,7 +4,7 @@
 
 /// Represents the reason why a package is deprecated.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-deprecation
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#package-deprecation
 enum PackageDeprecationReason {
   /// The package has bugs which make it unsuitable for usage.
   criticalBugs('CriticalBugs'),

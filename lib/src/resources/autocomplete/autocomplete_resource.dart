@@ -10,20 +10,23 @@ import '../../exceptions/exceptions.dart';
 import '../nuget_resource.dart';
 import 'models/autocomplete_package_ids_response.dart';
 
-/// The NuGet Autocomplete resource, used to retrieve package ids and versions
+/// The NuGet Autocomplete resource, used to retrieve package IDs and versions
 /// that match a query.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/search-autocomplete-service-resource
+/// See https://learn.microsoft.com/nuget/api/search-autocomplete-service-resource
 final class AutocompleteResource extends NuGetResource {
   AutocompleteResource({super.httpClient, required super.resourceUri});
 
-  /// Retrieves the package ids that match the [query].
+  /// Retrieves the package IDs that match the [query].
   ///
-  /// [includePrerelease] indicates whether to include pre-release packages in
-  /// the results. Defaults to `true`.
+  /// [includePrerelease] indicates whether to include *pre-release* packages in
+  /// the results. Defaults to `false`.
   ///
-  /// [skip] and [take] parameters are used for pagination. [skip] must be
-  /// greater than or equal to `0`. [take] must be greater than `0`.
+  /// [skip] represents the number of results to skip, for pagination. It must
+  /// be greater than or equal to `0`.
+  ///
+  /// [take] represents the number of results to return, for pagination. It must
+  /// be greater than `0`.
   ///
   /// Note: A package with only *unlisted* versions will not appear in the
   /// results.
@@ -32,7 +35,7 @@ final class AutocompleteResource extends NuGetResource {
   /// code.
   Future<AutocompletePackageIdsResponse> autocompletePackageIds(
     String? query, {
-    bool includePrerelease = true,
+    bool includePrerelease = false,
     bool includeSemVer2 = true,
     int? skip,
     int? take,
@@ -57,23 +60,25 @@ final class AutocompleteResource extends NuGetResource {
       200 => AutocompletePackageIdsResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
       _ => throw NuGetServerException(
-          'Failed to get autocomplete package Ids results: '
+          'Failed to get autocomplete package IDs results: '
           '${response.statusCode} ${response.reasonPhrase}'),
     };
   }
 
-  /// Retrieves the package versions that match the [packageId].
+  /// Retrieves the package versions for the [packageId].
   ///
-  /// [includePrerelease] indicates whether to include pre-release versions in
-  /// the results. Defaults to `true`.
+  /// [includePrerelease] indicates whether to include *pre-release* versions in
+  /// the results. Defaults to `false`.
   ///
   /// Note: A package version that is *unlisted* will not appear in the results.
+  ///
+  /// Returns an empty list if the package does not exist.
   ///
   /// Throws a [NuGetServerException] if the server returns a *non-200* status
   /// code.
   Future<List<String>> autocompletePackageVersions(
     String packageId, {
-    bool includePrerelease = true,
+    bool includePrerelease = false,
     bool includeSemVer2 = true,
   }) async {
     final id = packageId.toLowerCase();

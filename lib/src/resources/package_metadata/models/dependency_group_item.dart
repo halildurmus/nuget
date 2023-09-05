@@ -6,7 +6,7 @@ import 'dependency_item.dart';
 
 /// The dependencies of the package for a specific target framework.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#package-dependency-group
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#package-dependency-group
 final class DependencyGroupItem {
   const DependencyGroupItem({this.targetFramework, this.dependencies});
 

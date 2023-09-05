@@ -2,10 +2,10 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-/// Represents the JSON response from the Autocomplete Resource's
+/// Represents the response from the Autocomplete Resource's
 /// `Search for package IDs` API.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/search-autocomplete-service-resource#response
+/// See https://learn.microsoft.com/nuget/api/search-autocomplete-service-resource#response
 final class AutocompletePackageIdsResponse {
   const AutocompletePackageIdsResponse({
     required this.totalHits,

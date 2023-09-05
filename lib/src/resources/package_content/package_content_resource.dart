@@ -11,7 +11,7 @@ import '../nuget_resource.dart';
 /// The NuGet Package Content resource, used to retrieve the contents of a
 /// package.
 ///
-/// See https://learn.microsoft.com/en-us/nuget/api/package-base-address-resource
+/// See https://learn.microsoft.com/nuget/api/package-base-address-resource
 final class PackageContentResource extends NuGetResource {
   PackageContentResource({super.httpClient, required super.resourceUri});
 

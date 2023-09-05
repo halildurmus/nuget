@@ -5,9 +5,9 @@
 import 'registration_index_page.dart';
 import 'registration_index_page_item.dart';
 
+/// The response from the registration page.
 ///
-///
-/// See https://learn.microsoft.com/en-us/nuget/api/registration-base-url-resource#registration-page-object
+/// See https://learn.microsoft.com/nuget/api/registration-base-url-resource#registration-page-object
 final class RegistrationPageResponse extends RegistrationIndexPage {
   RegistrationPageResponse({
     required super.registrationPageUrl,
