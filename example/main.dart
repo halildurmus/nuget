@@ -5,10 +5,10 @@
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
+  // Create an instance of NuGetClient.
   final client = NuGetClient();
 
-  // Autocomplete package IDs
+  // Autocomplete package IDs.
   final autocompleteResponse = await client.autocompletePackageIds('json');
   print('The `json` query returned ${autocompleteResponse.totalHits} hits. '
       'Here are the first 20 results:');
@@ -18,19 +18,19 @@ void main() async {
 
   print('');
 
-  // Download package content (.nupkg)
+  // Download package content (.nupkg).
   final content =
       await client.downloadPackageContent('Newtonsoft.Json', version: '13.0.3');
   print('`Newtonsoft.Json` package size: ${content.length} bytes');
 
-  // Download package manifest (.nuspec)
+  // Download package manifest (.nuspec).
   final manifest = await client.downloadPackageManifest('Newtonsoft.Json',
       version: '13.0.3');
   print('`Newtonsoft.Json` manifest size: ${manifest.length} bytes');
 
   print('');
 
-  // Get all package metadata
+  // Get all package metadata.
   final allMetadata = await client.getAllPackageMetadata('Newtonsoft.Json');
   print('`Newtonsoft.Json` metadata of first three versions:');
   for (final metadata in allMetadata.take(3)) {
@@ -40,13 +40,13 @@ void main() async {
     print('');
   }
 
-  // Get latest package version
+  // Get latest package version.
   final latestVersion = await client.getLatestPackageVersion('Newtonsoft.Json');
   print('`Newtonsoft.Json` latest version: $latestVersion');
 
   print('');
 
-  // Get package metadata
+  // Get package metadata.
   final metadata =
       await client.getPackageMetadata('Newtonsoft.Json', version: '13.0.3');
   print('`Newtonsoft.Json` (13.0.3) metadata:');
@@ -56,7 +56,7 @@ void main() async {
 
   print('');
 
-  // Get package versions
+  // Get package versions.
   final versions = await client.getPackageVersions('Newtonsoft.Json');
   print('`Newtonsoft.Json` has ${versions.length} versions:');
   for (final version in versions) {
@@ -65,13 +65,13 @@ void main() async {
 
   print('');
 
-  // Check if package exists
+  // Check if package exists.
   final exists = await client.packageExists('Newtonsoft.Json');
   print('`Newtonsoft.Json` exists: $exists');
 
   print('');
 
-  // Search packages
+  // Search packages.
   final searchResponse = await client.searchPackages('win32');
   print('The `win32` query returned ${searchResponse.totalHits} hits. Here are '
       'the first 20 results:');
@@ -79,6 +79,6 @@ void main() async {
     print(' - ${package.packageId} (${package.version})');
   }
 
-  // Don't forget to close the client when you're done with it
+  // Close the client when it's no longer needed.
   client.close();
 }

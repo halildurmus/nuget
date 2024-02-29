@@ -25,7 +25,9 @@ final class AutocompletePackageIdsResponse {
           'data': final List<dynamic> data
         }) {
       return AutocompletePackageIdsResponse(
-          totalHits: totalHits, data: data.cast());
+        totalHits: totalHits,
+        data: data.cast(),
+      );
     }
     throw FormatException('Invalid JSON: $json');
   }

@@ -17,7 +17,7 @@ void main() async {
         final response = await client.autocompletePackageIds('win32',
             includePrerelease: true);
         check(response.totalHits).isGreaterOrEqual(250);
-        check(response.data).which(it()
+        check(response.data).which((it) => it
           ..length.equals(20)
           ..contains('Win32')
           ..contains('Microsoft.Win32.Registry')
@@ -28,11 +28,11 @@ void main() async {
         final response = await client.autocompletePackageIds('win32',
             includePrerelease: false);
         check(response.totalHits).isGreaterOrEqual(250);
-        check(response.data).which(it()
+        check(response.data).which((it) => it
           ..length.equals(20)
           ..contains('Win32')
           ..contains('Microsoft.Win32.Registry')
-          ..not(it()..contains('Microsoft.Windows.SDK.Win32Metadata')));
+          ..not((it) => it..contains('Microsoft.Windows.SDK.Win32Metadata')));
       });
 
       test(
@@ -41,10 +41,10 @@ void main() async {
         final response = await client.autocompletePackageIds('win32',
             includePrerelease: true, skip: 1, take: 10);
         check(response.totalHits).isGreaterOrEqual(250);
-        check(response.data).which(it()
+        check(response.data).which((it) => it
           ..length.equals(10)
-          ..not(it()..contains('Win32'))
-          ..not(it()..contains('Microsoft.Windows.SDK.Win32Metadata'))
+          ..not((it) => it..contains('Win32'))
+          ..not((it) => it..contains('Microsoft.Windows.SDK.Win32Metadata'))
           ..contains('Microsoft.Win32.Registry'));
       });
 
@@ -54,25 +54,25 @@ void main() async {
         final response = await client.autocompletePackageIds('win32',
             includePrerelease: false, skip: 0, take: 50);
         check(response.totalHits).isGreaterOrEqual(250);
-        check(response.data).which(it()
+        check(response.data).which((it) => it
           ..length.equals(50)
           ..contains('Win32')
           ..contains('Microsoft.Win32.Registry')
-          ..not(it()..contains('Microsoft.Windows.SDK.Win32Metadata'))
+          ..not((it) => it..contains('Microsoft.Windows.SDK.Win32Metadata'))
           ..contains('Win32Interop.Gdi32'));
       });
 
       test('`skip` parameter must be greater or equal to 0', () async {
         await check(client.autocompletePackageIds(null, skip: -1))
             .throws<RangeError>(
-          it()..has((e) => e.message, 'message').equals('Invalid value'),
+          (it) => it..has((e) => e.message, 'message').equals('Invalid value'),
         );
       });
 
       test('`take` parameter must be greater than 0', () async {
         await check(client.autocompletePackageIds(null, take: 0))
             .throws<RangeError>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message').equals('Must be greater than 0'),
         );
       });
@@ -105,7 +105,7 @@ void main() async {
           'Non.Existent.Package',
           version: '1.0.0',
         )).throws<PackageNotFoundException>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message')
                 .equals('Package `Non.Existent.Package` not found.')
             ..has((e) => e.toString(), 'toString').equals(
@@ -142,7 +142,7 @@ void main() async {
           'Non.Existent.Package',
           version: '1.0.0',
         )).throws<PackageNotFoundException>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message')
                 .equals('Package `Non.Existent.Package` not found.'),
         );
@@ -154,7 +154,7 @@ void main() async {
         final metadata =
             await client.getAllPackageMetadata('Microsoft.Win32.Registry');
         check(metadata).isNotEmpty();
-        check(metadata.map((m) => m.version)).which(it()
+        check(metadata.map((m) => m.version)).which((it) => it
           ..length.isGreaterOrEqual(55)
           ..contains('4.0.0-beta-22231')
           ..contains('4.0.0')
@@ -168,7 +168,7 @@ void main() async {
       test('returns metadata for all versions of a package (2)', () async {
         final metadata = await client.getAllPackageMetadata('Serilog');
         check(metadata).isNotEmpty();
-        check(metadata.map((m) => m.version)).which(it()
+        check(metadata.map((m) => m.version)).which((it) => it
           ..length.isGreaterOrEqual(510)
           ..contains('0.1.6')
           ..contains('1.2.47')
@@ -184,7 +184,7 @@ void main() async {
           () async {
         await check(client.getAllPackageMetadata('Non.Existent.Package'))
             .throws<PackageNotFoundException>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message')
                 .equals('Package `Non.Existent.Package` not found.'),
         );
@@ -196,10 +196,15 @@ void main() async {
           'returns the latest version of a package (including pre-release versions)',
           () async {
         final version = await client.getLatestPackageVersion(
-          'Microsoft.Win32.Registry',
+          'Microsoft.Extensions.DependencyInjection',
           includePrerelease: true,
         );
-        check(version).contains('-preview');
+        check(version).anyOf([
+          (it) => it..contains(RegExp(r'(-experimental|-preview|-rc)')),
+          // The latest version might not be a pre-release version.
+          (it) => it
+            ..not((it) => it.contains(RegExp(r'(-experimental|-preview|-rc)'))),
+        ]);
       });
 
       test(
@@ -209,14 +214,14 @@ void main() async {
           'Microsoft.Windows.SDK.Contracts',
           includePrerelease: false,
         );
-        check(version).not(it()..contains('-preview'));
+        check(version).not((it) => it..contains('-preview'));
       });
 
       test('throws a PackageNotFoundException if the package does not exist',
           () async {
         await check(client.getLatestPackageVersion('Non.Existent.Package'))
             .throws<PackageNotFoundException>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message')
                 .equals('Package `Non.Existent.Package` not found.'),
         );
@@ -236,7 +241,7 @@ void main() async {
           ..has((e) => e.authors, 'authors').equals('Microsoft')
           ..has((e) => e.dependencyGroups, 'dependencyGroups')
               .isNotNull()
-              .which(it()..length.equals(13))
+              .which((it) => it..length.equals(13))
           ..has((e) => e.deprecation, 'deprecation').isNull()
           ..has((e) => e.description, 'description').isNotNull().contains(
               'Provides support for accessing and modifying the Windows Registry.')
@@ -269,7 +274,7 @@ void main() async {
           'Non.Existent.Package',
           version: '1.0.0',
         )).throws<PackageNotFoundException>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message')
                 .equals('Package `Non.Existent.Package` not found.'),
         );
@@ -282,7 +287,7 @@ void main() async {
           'Microsoft.Win32.Registry',
           version: '0.1.0',
         )).throws<PackageNotFoundException>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message').equals(
                 'Package `Microsoft.Win32.Registry` (0.1.0) not found.'),
         );
@@ -296,7 +301,7 @@ void main() async {
           'Microsoft.Windows.SDK.Contracts',
           includePrerelease: true,
         );
-        check(versions).which(it()
+        check(versions).which((it) => it
           ..length.isGreaterOrEqual(92)
           ..contains('10.0.17134.1000')
           ..contains('10.0.19041.1')
@@ -311,13 +316,13 @@ void main() async {
           'Microsoft.Windows.SDK.Contracts',
           includePrerelease: false,
         );
-        check(versions).which(it()
+        check(versions).which((it) => it
           ..length.isGreaterOrEqual(12)
           ..contains('10.0.17134.1000')
           ..contains('10.0.19041.1')
           ..contains('10.0.22621.755')
-          ..not(it()..contains('10.0.22621-preview'))
-          ..not(it()..contains('10.0.25931-preview')));
+          ..not((it) => it..contains('10.0.22621-preview'))
+          ..not((it) => it..contains('10.0.25931-preview')));
       });
 
       test('returns an empty List if the package does not exist', () async {
@@ -330,7 +335,7 @@ void main() async {
     group('packageExists', () {
       test('returns true if the package exists', () async {
         await check(client.packageExists('Microsoft.Win32.Registry'))
-            .completes(it()..isTrue());
+            .completes((it) => it..isTrue());
       });
 
       test('returns true if the package with the specified version exists',
@@ -338,12 +343,12 @@ void main() async {
         await check(client.packageExists(
           'Microsoft.Win32.Registry',
           version: '5.0.0',
-        )).completes(it()..isTrue());
+        )).completes((it) => it..isTrue());
       });
 
       test('returns false if the package does not exist', () async {
         await check(client.packageExists('Non.Existent.Package'))
-            .completes(it()..isFalse());
+            .completes((it) => it..isFalse());
       });
 
       test(
@@ -352,7 +357,7 @@ void main() async {
         await check(client.packageExists(
           'Microsoft.Win32.Registry',
           version: '0.1.0',
-        )).completes(it()..isFalse());
+        )).completes((it) => it..isFalse());
       });
     });
 
@@ -362,7 +367,7 @@ void main() async {
             await client.searchPackages('win32', includePrerelease: true);
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).isNotEmpty();
-        check(response.data.map((pkg) => pkg.packageId)).which(it()
+        check(response.data.map((pkg) => pkg.packageId)).which((it) => it
           ..length.equals(20)
           ..contains('Win32')
           ..contains('Microsoft.Win32.Registry')
@@ -374,11 +379,11 @@ void main() async {
             await client.searchPackages('win32', includePrerelease: false);
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).isNotEmpty();
-        check(response.data.map((pkg) => pkg.packageId)).which(it()
+        check(response.data.map((pkg) => pkg.packageId)).which((it) => it
           ..length.equals(20)
           ..contains('Win32')
           ..contains('Microsoft.Win32.Registry')
-          ..not(it()..contains('Microsoft.Windows.SDK.Win32Metadata')));
+          ..not((it) => it..contains('Microsoft.Windows.SDK.Win32Metadata')));
       });
 
       test(
@@ -388,10 +393,10 @@ void main() async {
             includePrerelease: true, skip: 1, take: 10);
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).isNotEmpty();
-        check(response.data.map((pkg) => pkg.packageId)).which(it()
+        check(response.data.map((pkg) => pkg.packageId)).which((it) => it
           ..length.equals(10)
           ..contains('Win32')
-          ..not(it()..contains('Microsoft.Windows.SDK.Win32Metadata'))
+          ..not((it) => it..contains('Microsoft.Windows.SDK.Win32Metadata'))
           ..contains('Microsoft.Win32.Primitives'));
       });
 
@@ -402,23 +407,23 @@ void main() async {
             includePrerelease: false, skip: 0, take: 50);
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).isNotEmpty();
-        check(response.data.map((pkg) => pkg.packageId)).which(it()
+        check(response.data.map((pkg) => pkg.packageId)).which((it) => it
           ..length.equals(50)
           ..contains('Win32')
           ..contains('Microsoft.Win32.Registry')
-          ..not(it()..contains('Microsoft.Windows.SDK.Win32Metadata'))
+          ..not((it) => it..contains('Microsoft.Windows.SDK.Win32Metadata'))
           ..contains('Selenium.WebDriver.GeckoDriver.Win32'));
       });
 
       test('`skip` parameter must be greater or equal to 0', () async {
         await check(client.searchPackages(null, skip: -1)).throws<RangeError>(
-          it()..has((e) => e.message, 'message').equals('Invalid value'),
+          (it) => it..has((e) => e.message, 'message').equals('Invalid value'),
         );
       });
 
       test('`take` parameter must be greater than 0', () async {
         await check(client.searchPackages(null, take: 0)).throws<RangeError>(
-          it()
+          (it) => it
             ..has((e) => e.message, 'message').equals('Must be greater than 0'),
         );
       });

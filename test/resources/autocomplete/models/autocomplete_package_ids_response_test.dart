@@ -19,7 +19,7 @@ void main() {
     test('fromJson creates AutocompletePackageIdsResponse successfully', () {
       final response = AutocompletePackageIdsResponse.fromJson(json);
       check(response.totalHits).equals(2);
-      check(response.data).which(it()
+      check(response.data).which((it) => it
         ..length.equals(2)
         ..contains('Newtonsoft.Json')
         ..contains('Newtonsoft.Json.Schema'));

@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import '../../exceptions/exceptions.dart';
-import '../nuget_resource.dart';
+import '../../exception.dart';
+import '../resource.dart';
 import 'models/registration_index_response.dart';
 import 'models/registration_leaf_response.dart';
 import 'models/registration_page_response.dart';

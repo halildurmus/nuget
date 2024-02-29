@@ -6,8 +6,8 @@ import 'dart:convert';
 
 import 'package:version/version.dart';
 
-import '../../exceptions/exceptions.dart';
-import '../nuget_resource.dart';
+import '../../exception.dart';
+import '../resource.dart';
 import 'models/search_response.dart';
 
 /// The NuGet Search resource, used to search for packages.

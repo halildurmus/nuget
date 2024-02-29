@@ -6,14 +6,15 @@ import 'dart:convert';
 
 import 'package:version/version.dart';
 
-import '../../exceptions/exceptions.dart';
-import '../nuget_resource.dart';
+import '../../exception.dart';
+import '../resource.dart';
 import 'models/autocomplete_package_ids_response.dart';
 
 /// The NuGet Autocomplete resource, used to retrieve package IDs and versions
 /// that match a query.
 ///
-/// See https://learn.microsoft.com/nuget/api/search-autocomplete-service-resource
+/// See also:
+/// https://learn.microsoft.com/nuget/api/search-autocomplete-service-resource
 final class AutocompleteResource extends NuGetResource {
   AutocompleteResource({super.httpClient, required super.resourceUri});
 
@@ -61,7 +62,8 @@ final class AutocompleteResource extends NuGetResource {
           json.decode(response.body) as Map<String, dynamic>),
       _ => throw NuGetServerException(
           'Failed to get autocomplete package IDs results: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 
@@ -95,7 +97,8 @@ final class AutocompleteResource extends NuGetResource {
         (json.decode(response.body)['data'] as List<dynamic>).cast<String>(),
       _ => throw NuGetServerException(
           'Failed to get autocomplete package versions results: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 }

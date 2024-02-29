@@ -5,8 +5,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../../exceptions/exceptions.dart';
-import '../nuget_resource.dart';
+import '../../exception.dart';
+import '../resource.dart';
 
 /// The NuGet Package Content resource, used to retrieve the contents of a
 /// package.

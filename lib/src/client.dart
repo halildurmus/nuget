@@ -6,7 +6,7 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 
-import 'exceptions/exceptions.dart';
+import 'exception.dart';
 import 'resources/resources.dart';
 
 /// A client for interacting with the NuGet Server API.
@@ -56,7 +56,7 @@ final class NuGetClient {
       searchQueryResourceUri: searchQueryResourceUrl
     ) = resources;
 
-    // Required resources
+    // Required resources.
     _resourceCache[PackageContentResource] = PackageContentResource(
         httpClient: _httpClient, resourceUri: packageContentResourceUrl);
     _resourceCache[PackageMetadataResource] = PackageMetadataResource(
@@ -64,7 +64,7 @@ final class NuGetClient {
     _resourceCache[SearchResource] = SearchResource(
         httpClient: _httpClient, resourceUri: searchQueryResourceUrl);
 
-    // Optional resources
+    // Optional resources.
     if (searchAutocompleteResourceUrl != null) {
       _resourceCache[AutocompleteResource] = AutocompleteResource(
           httpClient: _httpClient, resourceUri: searchAutocompleteResourceUrl);
@@ -217,7 +217,7 @@ final class NuGetClient {
     final registrationIndex = await resource.getRegistrationIndex(packageId);
 
     for (final registrationIndexPage in registrationIndex.items) {
-      // Skip pages that do not contain the desired package version
+      // Skip pages that do not contain the desired package version.
       final RegistrationIndexPage(:lower, :upper) = registrationIndexPage;
       if (lower.compareTo(version) > 0) continue;
       if (upper.compareTo(version) < 0) continue;
@@ -238,7 +238,7 @@ final class NuGetClient {
       final result = items
           ?.where((item) => item.catalogEntry.version == version)
           .firstOrNull;
-      // We've found the metadata for the desired version
+      // We've found the metadata for the desired version.
       if (result != null) return result.catalogEntry;
     }
 

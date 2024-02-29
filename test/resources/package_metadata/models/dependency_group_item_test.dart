@@ -22,7 +22,7 @@ void main() {
     test('fromJson creates DependencyGroupItem successfully', () {
       final item = DependencyGroupItem.fromJson(json);
       check(item.targetFramework).isNull();
-      check(item.dependencies).isNotNull().which(it()..length.equals(1));
+      check(item.dependencies).isNotNull().which((it) => it..length.equals(1));
       final dependency = item.dependencies!.first;
       check(dependency)
         ..has((e) => e.id, 'id').equals('NuGet.Core')

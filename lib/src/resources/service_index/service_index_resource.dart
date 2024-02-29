@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import '../../exceptions/exceptions.dart';
-import '../nuget_resource.dart';
+import '../../exception.dart';
+import '../resource.dart';
 import 'models/service_index_response.dart';
 
 /// The NuGet Service Index resource, used to discover other resources.

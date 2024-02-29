@@ -4,7 +4,7 @@
 
 import 'package:version/version.dart';
 
-import '../../../exceptions/exceptions.dart';
+import '../../../exception.dart';
 import 'service_index_item.dart';
 
 /// Represents the response from the Service Index resource.

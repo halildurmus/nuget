@@ -13,15 +13,15 @@ metadata, and more.
 
 ## Features
 
-- [x] Autocomplete package IDs
-- [x] Download package content (`.nupkg`)
-- [x] Download package manifest (`.nuspec`)
-- [x] Get all package metadata (all versions)
-- [x] Get latest package version
-- [x] Get package metadata (specific version)
-- [x] Get package versions
-- [x] Check if a package exists
-- [x] Search packages
+- Autocomplete package IDs
+- Download package content (`.nupkg`)
+- Download package manifest (`.nuspec`)
+- Get all package metadata (all versions)
+- Get latest package version
+- Get package metadata (specific version)
+- Get package versions
+- Check if a package exists
+- Search packages
 
 ## Usage
 
@@ -31,7 +31,7 @@ metadata, and more.
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
+  // Create an instance of NuGetClient.
   final client = NuGetClient();
 
   const query = 'win32';
@@ -42,7 +42,7 @@ void main() async {
     print(' - $packageId');
   }
 
-  // Don't forget to close the client when you're done with it
+  // Close the client when it's no longer needed.
   client.close();
 }
 ```
@@ -53,7 +53,6 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const packageId = 'Newtonsoft.Json';
@@ -62,7 +61,6 @@ void main() async {
       await client.downloadPackageContent(packageId, version: version);
   print('`$packageId` ($version) package size: ${content.length} bytes');
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```
@@ -73,7 +71,6 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const packageId = 'Newtonsoft.Json';
@@ -82,7 +79,6 @@ void main() async {
       await client.downloadPackageManifest(packageId, version: version);
   print('`$packageId` ($version) manifest size: ${manifest.length} bytes');
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```
@@ -93,7 +89,6 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const packageId = 'Newtonsoft.Json';
@@ -106,7 +101,6 @@ void main() async {
     print('');
   }
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```
@@ -117,14 +111,12 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const packageId = 'Newtonsoft.Json';
   final latestVersion = await client.getLatestPackageVersion(packageId);
   print('`$packageId` latest version: $latestVersion');
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```
@@ -135,7 +127,6 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const packageId = 'Newtonsoft.Json';
@@ -146,7 +137,6 @@ void main() async {
   print(' - Description: ${metadata.description}');
   print(' - Author(s): ${metadata.authors}');
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```
@@ -157,7 +147,6 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const packageId = 'Newtonsoft.Json';
@@ -167,7 +156,6 @@ void main() async {
     print(' - $version');
   }
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```
@@ -178,14 +166,12 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const packageId = 'Newtonsoft.Json';
   final exists = await client.packageExists(packageId);
   print('`$packageId` exists: $exists');
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```
@@ -196,7 +182,6 @@ void main() async {
 import 'package:nuget/nuget.dart';
 
 void main() async {
-  // Create an instance of NuGetClient
   final client = NuGetClient();
 
   const query = 'win32';
@@ -207,7 +192,6 @@ void main() async {
     print(' - ${package.packageId} (${package.version})');
   }
 
-  // Don't forget to close the client when you're done with it
   client.close();
 }
 ```

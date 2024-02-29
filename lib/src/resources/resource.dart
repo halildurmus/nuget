@@ -17,7 +17,7 @@ abstract class NuGetResource {
   /// The underlying HTTP client used to make requests.
   final http.Client httpClient;
 
-  /// The [Uri] of the *NuGet* resource.
+  /// The URI of the *NuGet* resource.
   final Uri resourceUri;
 
   /// Closes the underlying HTTP client.

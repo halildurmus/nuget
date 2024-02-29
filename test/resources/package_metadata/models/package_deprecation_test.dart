@@ -15,7 +15,7 @@ void main() {
 
     test('fromJson creates PackageDeprecation successfully', () {
       final deprecation = PackageDeprecation.fromJson(json);
-      check(deprecation.reasons).which(it()
+      check(deprecation.reasons).which((it) => it
         ..length.equals(1)
         ..contains(PackageDeprecationReason.legacy));
       final altenatePackage = deprecation.alternatePackage!;
