@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:checks/checks.dart';
 import 'package:nuget/nuget.dart';
 import 'package:test/scaffolding.dart';
@@ -71,13 +67,13 @@ void main() {
       check(() => SearchEntry.fromJson(invalidJson))
           .throws<FormatException>()
           .has((e) => e.message, 'message')
-          .equals("Invalid JSON: {id: null}");
+          .equals('Invalid JSON: {id: null}');
     });
 
     test('toString', () {
       final entry = SearchEntry.fromJson(json);
       check(entry.toString()).equals(
-        'SearchEntry(packageId: NuGet.Versioning, version: 4.4.0, versions: [VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/3.3.0.json, version: 3.3.0, downloads: 50343), VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/3.4.3.json, version: 3.4.3, downloads: 27932), VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/4.0.0.json, version: 4.0.0, downloads: 63004), VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/4.4.0.json, version: 4.4.0, downloads: 617)], description: NuGet\'s implementation of Semantic Versioning., authors: NuGet, iconUrl: null, licenseUrl: https://raw.githubusercontent.com/NuGet/NuGet.Client/dev/LICENSE.txt, owners: null, projectUrl: null, registration: https://api.nuget.org/v3/registration-sample/nuget.versioning/index.json, summary: , tags: semver,semantic,versioning, title: NuGet.Versioning, totalDownloads: 141896, verified: true)',
+        "SearchEntry(packageId: NuGet.Versioning, version: 4.4.0, versions: [VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/3.3.0.json, version: 3.3.0, downloads: 50343), VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/3.4.3.json, version: 3.4.3, downloads: 27932), VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/4.0.0.json, version: 4.0.0, downloads: 63004), VersionItem(registrationLeafUrl: https://api.nuget.org/v3/registration-sample/nuget.versioning/4.4.0.json, version: 4.4.0, downloads: 617)], description: NuGet's implementation of Semantic Versioning., authors: NuGet, iconUrl: null, licenseUrl: https://raw.githubusercontent.com/NuGet/NuGet.Client/dev/LICENSE.txt, owners: null, projectUrl: null, registration: https://api.nuget.org/v3/registration-sample/nuget.versioning/index.json, summary: , tags: semver,semantic,versioning, title: NuGet.Versioning, totalDownloads: 141896, verified: true)",
       );
     });
   });

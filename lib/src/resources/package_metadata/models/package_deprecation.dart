@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'alternate_package.dart';
 import 'package_deprecation_reason.dart';
 
@@ -14,15 +10,6 @@ final class PackageDeprecation {
     this.message,
     this.alternatePackage,
   });
-
-  /// The reasons why the package was deprecated.
-  final List<PackageDeprecationReason> reasons;
-
-  /// The additional details about this deprecation.
-  final String? message;
-
-  /// The alternate package that should be used instead.
-  final AlternatePackage? alternatePackage;
 
   factory PackageDeprecation.fromJson(Map<String, dynamic> json) {
     if (json case {'reasons': final List<dynamic> reasonsVal}) {
@@ -43,6 +30,15 @@ final class PackageDeprecation {
     }
     throw FormatException('Invalid JSON: $json');
   }
+
+  /// The reasons why the package was deprecated.
+  final List<PackageDeprecationReason> reasons;
+
+  /// The additional details about this deprecation.
+  final String? message;
+
+  /// The alternate package that should be used instead.
+  final AlternatePackage? alternatePackage;
 
   @override
   String toString() =>

@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'dart:convert';
 
 import '../../exception.dart';
@@ -15,7 +11,7 @@ import 'models/registration_page_response.dart';
 ///
 /// See https://learn.microsoft.com/nuget/api/registration-base-url-resource
 final class PackageMetadataResource extends NuGetResource {
-  PackageMetadataResource({super.httpClient, required super.resourceUri});
+  PackageMetadataResource({required super.resourceUri, super.httpClient});
 
   /// Retrieves the registration index for the package with the [packageId].
   ///

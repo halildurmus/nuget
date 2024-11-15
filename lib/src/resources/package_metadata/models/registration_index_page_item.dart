@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'catalog_entry.dart';
 
 /// A resource in the `items` List from the `RegistrationIndexPage` class.
@@ -13,15 +9,6 @@ class RegistrationIndexPageItem {
     required this.catalogEntry,
     required this.packageContent,
   });
-
-  /// The URL to the registration leaf.
-  final String registrationLeafUrl;
-
-  /// The catalog entry containing the package metadata.
-  final CatalogEntry catalogEntry;
-
-  /// The URL to the package content (`.nupkg`).
-  final String packageContent;
 
   factory RegistrationIndexPageItem.fromJson(Map<String, dynamic> json) {
     if (json
@@ -39,6 +26,15 @@ class RegistrationIndexPageItem {
     }
     throw FormatException('Invalid JSON: $json');
   }
+
+  /// The URL to the registration leaf.
+  final String registrationLeafUrl;
+
+  /// The catalog entry containing the package metadata.
+  final CatalogEntry catalogEntry;
+
+  /// The URL to the package content (`.nupkg`).
+  final String packageContent;
 
   @override
   String toString() =>

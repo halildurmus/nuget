@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 /// The response from the registration leaf.
 ///
 /// Note: On `NuGet.org`, the [published] value is set to year `1900` when the
@@ -15,26 +11,6 @@ class RegistrationLeafResponse {
     this.published,
     this.registration,
   });
-
-  /// The URL to the registration leaf.
-  final String registrationLeafUrl;
-
-  ///	The URL to the catalog entry that produced these leaf.
-  final String? catalogEntry;
-
-  /// Whether the package is listed in search results.
-  ///
-  /// If `null`, the package should be considered as listed.
-  final bool? listed;
-
-  /// The URL to the package content (.nupkg).
-  final String? packageContent;
-
-  /// When the package was published.
-  final DateTime? published;
-
-  /// The URL to the registration index.
-  final String? registration;
 
   factory RegistrationLeafResponse.fromJson(Map<String, dynamic> json) {
     if (json case {'@id': final String registrationLeafUrl}) {
@@ -56,6 +32,26 @@ class RegistrationLeafResponse {
     }
     throw FormatException('Invalid JSON: $json');
   }
+
+  /// The URL to the registration leaf.
+  final String registrationLeafUrl;
+
+  ///	The URL to the catalog entry that produced these leaf.
+  final String? catalogEntry;
+
+  /// Whether the package is listed in search results.
+  ///
+  /// If `null`, the package should be considered as listed.
+  final bool? listed;
+
+  /// The URL to the package content (.nupkg).
+  final String? packageContent;
+
+  /// When the package was published.
+  final DateTime? published;
+
+  /// The URL to the registration index.
+  final String? registration;
 
   @override
   String toString() => 'RegistrationLeafResponse('

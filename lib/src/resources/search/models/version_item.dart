@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 /// A resource in the `versions` List from the `SearchEntry` class.
 ///
 /// See https://learn.microsoft.com/nuget/api/search-query-service-resource#search-result
@@ -11,16 +7,6 @@ final class VersionItem {
     required this.version,
     required this.downloads,
   });
-
-  /// The absolute URL to the associated registration leaf.
-  final String registrationLeafUrl;
-
-  /// The full SemVer 2.0.0 version string of the package (could contain build
-  /// metadata).
-  final String version;
-
-  /// The number of downloads for this specific package version.
-  final int downloads;
 
   factory VersionItem.fromJson(Map<String, dynamic> json) {
     if (json
@@ -37,6 +23,16 @@ final class VersionItem {
     }
     throw FormatException('Invalid JSON: $json');
   }
+
+  /// The absolute URL to the associated registration leaf.
+  final String registrationLeafUrl;
+
+  /// The full SemVer 2.0.0 version string of the package (could contain build
+  /// metadata).
+  final String version;
+
+  /// The number of downloads for this specific package version.
+  final int downloads;
 
   @override
   String toString() => 'VersionItem(registrationLeafUrl: $registrationLeafUrl, '

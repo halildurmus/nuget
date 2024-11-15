@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'dart:convert';
 
 import '../../exception.dart';
@@ -16,7 +12,7 @@ final class ServiceIndexResource extends NuGetResource {
   ///
   /// [resourceUri] defaults to [nugetOrgServiceIndex], which is the official
   /// `NuGet.org` service index.
-  ServiceIndexResource({super.httpClient, required super.resourceUri});
+  ServiceIndexResource({required super.resourceUri, super.httpClient});
 
   /// The official `NuGet.org` service index.
   static final nugetOrgServiceIndex =

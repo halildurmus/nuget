@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:checks/checks.dart';
 import 'package:nuget/nuget.dart';
 import 'package:test/scaffolding.dart';
@@ -25,8 +21,7 @@ void main() async {
       });
 
       test('excludes pre-release packages in results', () async {
-        final response = await client.autocompletePackageIds('win32',
-            includePrerelease: false);
+        final response = await client.autocompletePackageIds('win32');
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).which((it) => it
           ..length.equals(20)
@@ -51,8 +46,8 @@ void main() async {
       test(
           'pagination with `skip` and `take` parameters (excluding pre-release packages)',
           () async {
-        final response = await client.autocompletePackageIds('win32',
-            includePrerelease: false, skip: 0, take: 50);
+        final response =
+            await client.autocompletePackageIds('win32', skip: 0, take: 50);
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).which((it) => it
           ..length.equals(50)
@@ -200,10 +195,10 @@ void main() async {
           includePrerelease: true,
         );
         check(version).anyOf([
-          (it) => it..contains(RegExp(r'(-experimental|-preview|-rc)')),
+          (it) => it..contains(RegExp('(-experimental|-preview|-rc)')),
           // The latest version might not be a pre-release version.
           (it) => it
-            ..not((it) => it.contains(RegExp(r'(-experimental|-preview|-rc)'))),
+            ..not((it) => it.contains(RegExp('(-experimental|-preview|-rc)'))),
         ]);
       });
 
@@ -212,7 +207,6 @@ void main() async {
           () async {
         final version = await client.getLatestPackageVersion(
           'Microsoft.Windows.SDK.Contracts',
-          includePrerelease: false,
         );
         check(version).not((it) => it..contains('-preview'));
       });
@@ -312,10 +306,8 @@ void main() async {
 
       test('returns all versions of a package (excluding pre-release versions)',
           () async {
-        final versions = await client.getPackageVersions(
-          'Microsoft.Windows.SDK.Contracts',
-          includePrerelease: false,
-        );
+        final versions =
+            await client.getPackageVersions('Microsoft.Windows.SDK.Contracts');
         check(versions).which((it) => it
           ..length.isGreaterOrEqual(12)
           ..contains('10.0.17134.1000')
@@ -375,8 +367,7 @@ void main() async {
       });
 
       test('excludes pre-release packages in results', () async {
-        final response =
-            await client.searchPackages('win32', includePrerelease: false);
+        final response = await client.searchPackages('win32');
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).isNotEmpty();
         check(response.data.map((pkg) => pkg.packageId)).which((it) => it
@@ -403,8 +394,8 @@ void main() async {
       test(
           'pagination with `skip` and `take` parameters (excluding pre-release packages)',
           () async {
-        final response = await client.searchPackages('win32',
-            includePrerelease: false, skip: 0, take: 50);
+        final response =
+            await client.searchPackages('win32', skip: 0, take: 50);
         check(response.totalHits).isGreaterOrEqual(250);
         check(response.data).isNotEmpty();
         check(response.data.map((pkg) => pkg.packageId)).which((it) => it

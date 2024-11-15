@@ -201,8 +201,8 @@ void main() async {
 Please file feature requests and bugs at the
 [issue tracker][issue_tracker_link].
 
-[ci_badge]: https://github.com/halildurmus/nuget/actions/workflows/dart.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/nuget/actions/workflows/dart.yml
+[ci_badge]: https://github.com/halildurmus/nuget/actions/workflows/nuget.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/nuget/actions/workflows/nuget.yml
 [codecov_badge_link]: https://codecov.io/gh/halildurmus/nuget/branch/main/graph/badge.svg?token=42CZB2LDML
 [codecov_link]: https://codecov.io/gh/halildurmus/nuget
 [issue_tracker_link]: https://github.com/halildurmus/nuget/issues

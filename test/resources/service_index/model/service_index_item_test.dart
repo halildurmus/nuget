@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:checks/checks.dart';
 import 'package:nuget/nuget.dart';
 import 'package:test/scaffolding.dart';
@@ -30,7 +26,7 @@ void main() {
       check(() => ServiceIndexItem.fromJson(invalidJson))
           .throws<FormatException>()
           .has((e) => e.message, 'message')
-          .equals("Invalid JSON: {@id: null}");
+          .equals('Invalid JSON: {@id: null}');
     });
 
     test('toString', () {

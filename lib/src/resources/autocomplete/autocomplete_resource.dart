@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'dart:convert';
 
 import 'package:version/version.dart';
@@ -16,7 +12,7 @@ import 'models/autocomplete_package_ids_response.dart';
 /// See also:
 /// https://learn.microsoft.com/nuget/api/search-autocomplete-service-resource
 final class AutocompleteResource extends NuGetResource {
-  AutocompleteResource({super.httpClient, required super.resourceUri});
+  AutocompleteResource({required super.resourceUri, super.httpClient});
 
   /// Retrieves the package IDs that match the [query].
   ///
@@ -93,8 +89,9 @@ final class AutocompleteResource extends NuGetResource {
     );
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
-      200 =>
-        (json.decode(response.body)['data'] as List<dynamic>).cast<String>(),
+      200 => ((json.decode(response.body) as Map<dynamic, dynamic>)['data']
+              as List<dynamic>)
+          .cast<String>(),
       _ => throw NuGetServerException(
           'Failed to get autocomplete package versions results: '
           '${response.statusCode} ${response.reasonPhrase}',

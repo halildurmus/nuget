@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
@@ -75,8 +71,8 @@ final class NuGetClient {
 
   /// Retrieves the resource of type [T] from the [_resourceCache].
   T _getResource<T extends NuGetResource>() {
-    assert(_isInitialized);
-    if (_resourceCache.containsKey(T)) return _resourceCache[T] as T;
+    assert(_isInitialized, 'The client has not been initialized.');
+    if (_resourceCache.containsKey(T)) return _resourceCache[T]! as T;
     throw StateError('Resource `$T` not found.');
   }
 
@@ -104,7 +100,7 @@ final class NuGetClient {
   }) async {
     if (!_isInitialized) await _initialize();
     final resource = _getResource<AutocompleteResource>();
-    return await resource.autocompletePackageIds(
+    return resource.autocompletePackageIds(
       query,
       includePrerelease: includePrerelease,
       skip: skip,
@@ -126,7 +122,7 @@ final class NuGetClient {
   }) async {
     if (!_isInitialized) await _initialize();
     final resource = _getResource<PackageContentResource>();
-    return await resource.downloadPackageContent(packageId, version: version);
+    return resource.downloadPackageContent(packageId, version: version);
   }
 
   /// Returns the contents of the package manifest (`.nuspec`) file for the
@@ -143,7 +139,7 @@ final class NuGetClient {
   }) async {
     if (!_isInitialized) await _initialize();
     final resource = _getResource<PackageContentResource>();
-    return await resource.downloadPackageManifest(packageId, version: version);
+    return resource.downloadPackageManifest(packageId, version: version);
   }
 
   /// Returns the metadata for all versions of the package with the [packageId].
@@ -263,7 +259,7 @@ final class NuGetClient {
   }) async {
     if (!_isInitialized) await _initialize();
     final resource = _getResource<AutocompleteResource>();
-    return await resource.autocompletePackageVersions(
+    return resource.autocompletePackageVersions(
       packageId,
       includePrerelease: includePrerelease,
     );
@@ -314,7 +310,7 @@ final class NuGetClient {
   }) async {
     if (!_isInitialized) await _initialize();
     final resource = _getResource<SearchResource>();
-    return await resource.searchPackages(
+    return resource.searchPackages(
       query,
       includePrerelease: includePrerelease,
       skip: skip,

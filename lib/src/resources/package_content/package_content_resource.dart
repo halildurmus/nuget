@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -13,7 +9,7 @@ import '../resource.dart';
 ///
 /// See https://learn.microsoft.com/nuget/api/package-base-address-resource
 final class PackageContentResource extends NuGetResource {
-  PackageContentResource({super.httpClient, required super.resourceUri});
+  PackageContentResource({required super.resourceUri, super.httpClient});
 
   /// Returns the contents of the package content (`.nupkg`) file for the
   /// package with the [packageId] and [version].
@@ -83,7 +79,8 @@ final class PackageContentResource extends NuGetResource {
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
-      200 => (json.decode(response.body)['versions'] as List<dynamic>)
+      200 => ((json.decode(response.body) as Map<dynamic, dynamic>)['versions']
+              as List<dynamic>)
           .cast<String>(),
       _ => throw NuGetServerException('Failed to get package versions: '
           '${response.statusCode} ${response.reasonPhrase}'),

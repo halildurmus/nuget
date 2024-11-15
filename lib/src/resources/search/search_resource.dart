@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'dart:convert';
 
 import 'package:version/version.dart';
@@ -14,7 +10,7 @@ import 'models/search_response.dart';
 ///
 /// See https://learn.microsoft.com/nuget/api/search-query-service-resource
 final class SearchResource extends NuGetResource {
-  SearchResource({super.httpClient, required super.resourceUri});
+  SearchResource({required super.resourceUri, super.httpClient});
 
   /// Retrieves the packages that match the [query].
   ///

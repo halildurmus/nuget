@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'version_item.dart';
 
 /// A resource in the `data` List from the `SearchResponse` class.
@@ -12,64 +8,19 @@ final class SearchEntry {
     required this.packageId,
     required this.version,
     required this.versions,
-    this.description,
     required this.authors,
+    required this.tags,
+    this.description,
     this.iconUrl,
     this.licenseUrl,
     this.owners,
     this.projectUrl,
     this.registration,
     this.summary,
-    required this.tags,
     this.title,
     this.totalDownloads,
     this.verified,
   });
-
-  /// The ID of the package.
-  final String packageId;
-
-  /// The full NuGet version after normalization, including any SemVer 2.0.0
-  /// build metadata.
-  final String version;
-
-  /// All of the versions of the package matching the prerelease parameter.
-  final List<VersionItem> versions;
-
-  /// The package's description.
-  final String? description;
-
-  /// The package's authors.
-  final String authors;
-
-  /// The URL to the package's icon.
-  final String? iconUrl;
-
-  /// The URL to the package's license.
-  final String? licenseUrl;
-
-  final String? owners;
-
-  /// The URL for the package's home page.
-  final String? projectUrl;
-
-  /// The absolute URL to the associated registration index.
-  final String? registration;
-
-  /// The package's summary.
-  final String? summary;
-
-  /// The package's tags.
-  final String tags;
-
-  /// The package's title.
-  final String? title;
-
-  /// This value can be inferred by the sum of downloads in the [versions] List.
-  final int? totalDownloads;
-
-  /// Whether the package is verified.
-  final bool? verified;
 
   factory SearchEntry.fromJson(Map<String, dynamic> json) {
     if (json
@@ -121,6 +72,51 @@ final class SearchEntry {
     }
     throw FormatException('Invalid JSON: $json');
   }
+
+  /// The ID of the package.
+  final String packageId;
+
+  /// The full NuGet version after normalization, including any SemVer 2.0.0
+  /// build metadata.
+  final String version;
+
+  /// All of the versions of the package matching the prerelease parameter.
+  final List<VersionItem> versions;
+
+  /// The package's description.
+  final String? description;
+
+  /// The package's authors.
+  final String authors;
+
+  /// The URL to the package's icon.
+  final String? iconUrl;
+
+  /// The URL to the package's license.
+  final String? licenseUrl;
+
+  final String? owners;
+
+  /// The URL for the package's home page.
+  final String? projectUrl;
+
+  /// The absolute URL to the associated registration index.
+  final String? registration;
+
+  /// The package's summary.
+  final String? summary;
+
+  /// The package's tags.
+  final String tags;
+
+  /// The package's title.
+  final String? title;
+
+  /// This value can be inferred by the sum of downloads in the [versions] List.
+  final int? totalDownloads;
+
+  /// Whether the package is verified.
+  final bool? verified;
 
   @override
   String toString() => 'SearchEntry(packageId: $packageId, version: $version, '
