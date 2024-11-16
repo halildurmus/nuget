@@ -21,19 +21,20 @@ jobs:
       - name: 🔍 Check if There is a Release Commit
         id: check_release
         run: |
-          # Get the latest commit message
-          latest_commit_msg=$(git log -1 --pretty=%B)
+          latest_commit_msg=$(git log -1 --pretty=format:%s)
+          echo "📜 Latest commit: $latest_commit_msg"
 
-          # Check if the commit message matches the release pattern
           if [[ "$latest_commit_msg" =~ ^chore\(release\):\ v.* ]]; then
+            echo "🎉 Release commit detected. Proceeding with the publish step."
             echo "should_publish=true" >> $GITHUB_OUTPUT
           else
+            echo "❌ No release commit detected. Skipping the publish step."
             echo "should_publish=false" >> $GITHUB_OUTPUT
           fi
 
   publish:
     needs: check-release
-    if: needs.check-release.outputs.should_publish == 'true'
+    if: ${{ needs.check-release.outputs.should_publish == 'true' }}
     uses: halildurmus/workflows/.github/workflows/dart_pub_publish.yml@main
     secrets:
       token: ${{ secrets.PAT }}

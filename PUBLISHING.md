@@ -8,11 +8,9 @@ Go to the [GitHub Actions] tab and trigger the [Prepare Release] workflow.
 
 This workflow will:
 
-- 🔄 **Remove** the `-wip` suffix from the version number in the `pubspec.yaml`
-  file _(e.g., `6.1.0-wip` ➡️ `6.1.0`)_
-- 📝 **Update** the `CHANGELOG.md` file:
-  - Replace `## unreleased` with the new version number and today’s date
-    _(e.g., `## unreleased` ➡️ `## [6.1.0] - 2025-06-15`)_
+- 🔼 **Bump** the `version` in the `pubspec.yaml` file based on commit messages
+  _(e.g., `6.0.0` ➡️ `6.1.0`)_.
+- 📝 **Update** the `CHANGELOG.md` file with the latest changes.
 
 After making these changes, the workflow will create a pull request (PR)
 _(e.g., **`chore(release): v6.1.0`**)_.
