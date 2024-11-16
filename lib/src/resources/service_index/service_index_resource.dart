@@ -27,9 +27,12 @@ final class ServiceIndexResource extends NuGetResource {
     final response = await httpClient.get(resourceUri);
     return switch (response.statusCode) {
       200 => ServiceIndexResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetServerException('Failed to get service index: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+          json.decode(response.body) as Map<String, dynamic>,
+        ),
+      _ => throw NuGetServerException(
+          'Failed to get service index: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 }

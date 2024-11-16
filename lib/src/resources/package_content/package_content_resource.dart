@@ -34,8 +34,10 @@ final class PackageContentResource extends NuGetResource {
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
       200 => response.bodyBytes,
-      _ => throw NuGetServerException('Failed to download package content: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+      _ => throw NuGetServerException(
+          'Failed to download package content: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 
@@ -58,8 +60,10 @@ final class PackageContentResource extends NuGetResource {
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
       200 => response.bodyBytes,
-      _ => throw NuGetServerException('Failed to download package manifest: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+      _ => throw NuGetServerException(
+          'Failed to download package manifest: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 
@@ -82,8 +86,10 @@ final class PackageContentResource extends NuGetResource {
       200 => ((json.decode(response.body) as Map<dynamic, dynamic>)['versions']
               as List<dynamic>)
           .cast<String>(),
-      _ => throw NuGetServerException('Failed to get package versions: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+      _ => throw NuGetServerException(
+          'Failed to get package versions: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 }

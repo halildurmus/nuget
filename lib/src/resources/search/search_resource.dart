@@ -55,9 +55,12 @@ final class SearchResource extends NuGetResource {
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       200 => SearchResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetServerException('Failed to get search packages response: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+          json.decode(response.body) as Map<String, dynamic>,
+        ),
+      _ => throw NuGetServerException(
+          'Failed to get search packages response: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 }

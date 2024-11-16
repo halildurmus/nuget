@@ -55,7 +55,8 @@ final class AutocompleteResource extends NuGetResource {
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       200 => AutocompletePackageIdsResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>),
+          json.decode(response.body) as Map<String, dynamic>,
+        ),
       _ => throw NuGetServerException(
           'Failed to get autocomplete package IDs results: '
           '${response.statusCode} ${response.reasonPhrase}',

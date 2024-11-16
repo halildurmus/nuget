@@ -30,8 +30,10 @@ final class PackageMetadataResource extends NuGetResource {
       404 => throw PackageNotFoundException(packageId),
       200 => RegistrationIndexResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetServerException('Failed to get registration index: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+      _ => throw NuGetServerException(
+          'Failed to get registration index: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 
@@ -45,8 +47,10 @@ final class PackageMetadataResource extends NuGetResource {
     return switch (response.statusCode) {
       200 => RegistrationPageResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetServerException('Failed to get registration page: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+      _ => throw NuGetServerException(
+          'Failed to get registration page: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 
@@ -60,8 +64,10 @@ final class PackageMetadataResource extends NuGetResource {
     return switch (response.statusCode) {
       200 => RegistrationLeafResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>),
-      _ => throw NuGetServerException('Failed to get registration leaf: '
-          '${response.statusCode} ${response.reasonPhrase}'),
+      _ => throw NuGetServerException(
+          'Failed to get registration leaf: '
+          '${response.statusCode} ${response.reasonPhrase}',
+        ),
     };
   }
 }

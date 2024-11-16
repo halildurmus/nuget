@@ -41,7 +41,9 @@ final class NuGetClient {
   /// index.
   Future<void> _initialize() async {
     final serviceIndexResource = ServiceIndexResource(
-        httpClient: _httpClient, resourceUri: _serviceIndexUri);
+      httpClient: _httpClient,
+      resourceUri: _serviceIndexUri,
+    );
     _resourceCache[ServiceIndexResource] = serviceIndexResource;
 
     final resources = await serviceIndexResource.get();
@@ -54,16 +56,24 @@ final class NuGetClient {
 
     // Required resources.
     _resourceCache[PackageContentResource] = PackageContentResource(
-        httpClient: _httpClient, resourceUri: packageContentResourceUrl);
+      httpClient: _httpClient,
+      resourceUri: packageContentResourceUrl,
+    );
     _resourceCache[PackageMetadataResource] = PackageMetadataResource(
-        httpClient: _httpClient, resourceUri: packageMetadataResourceUrl);
+      httpClient: _httpClient,
+      resourceUri: packageMetadataResourceUrl,
+    );
     _resourceCache[SearchResource] = SearchResource(
-        httpClient: _httpClient, resourceUri: searchQueryResourceUrl);
+      httpClient: _httpClient,
+      resourceUri: searchQueryResourceUrl,
+    );
 
     // Optional resources.
     if (searchAutocompleteResourceUrl != null) {
       _resourceCache[AutocompleteResource] = AutocompleteResource(
-          httpClient: _httpClient, resourceUri: searchAutocompleteResourceUrl);
+        httpClient: _httpClient,
+        resourceUri: searchAutocompleteResourceUrl,
+      );
     }
 
     _isInitialized = true;
@@ -190,8 +200,10 @@ final class NuGetClient {
     String packageId, {
     bool includePrerelease = false,
   }) async {
-    final versions = await getPackageVersions(packageId,
-        includePrerelease: includePrerelease);
+    final versions = await getPackageVersions(
+      packageId,
+      includePrerelease: includePrerelease,
+    );
     return switch (versions) {
       [..., final version] => version,
       _ => throw PackageNotFoundException(packageId),
