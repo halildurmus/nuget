@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+
 import '../../exception.dart';
 import '../resource.dart';
 import 'models/registration_index_response.dart';
@@ -11,7 +13,14 @@ import 'models/registration_page_response.dart';
 ///
 /// See https://learn.microsoft.com/nuget/api/registration-base-url-resource
 final class PackageMetadataResource extends NuGetResource {
-  PackageMetadataResource({required super.resourceUri, super.httpClient});
+  PackageMetadataResource({required super.resourceUri, http.Client? httpClient})
+      : httpClient = httpClient ?? http.Client();
+
+  /// The underlying HTTP client used to make requests.
+  final http.Client httpClient;
+
+  /// Closes the underlying HTTP client.
+  void close() => httpClient.close();
 
   /// Retrieves the registration index for the package with the [packageId].
   ///
