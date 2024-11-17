@@ -21,6 +21,7 @@ metadata, and more.
 - Get package metadata (specific version)
 - Get package versions
 - Check if a package exists
+- Get report abuse URL for a package
 - Search packages
 
 ## Usage
@@ -171,6 +172,23 @@ void main() async {
   const packageId = 'Newtonsoft.Json';
   final exists = await client.packageExists(packageId);
   print('`$packageId` exists: $exists');
+
+  client.close();
+}
+```
+
+### Get report abuse URL for a package
+
+```dart
+import 'package:nuget/nuget.dart';
+
+void main() async {
+  final client = NuGetClient();
+
+  const packageId = 'Newtonsoft.Json';
+  const version = '13.0.3';
+  final reportAbuseUrl = await client.getReportAbuseUrl(packageId, version);
+  print('Report abuse URL for `$packageId` ($version): $reportAbuseUrl');
 
   client.close();
 }

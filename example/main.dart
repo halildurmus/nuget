@@ -67,6 +67,13 @@ void main() async {
 
   print('');
 
+  // Get report abuse URL.
+  final reportAbuseUrl =
+      await client.getReportAbuseUrl('Newtonsoft.Json', '13.0.3');
+  print('Report abuse URL for `Newtonsoft.Json` (13.0.3): $reportAbuseUrl');
+
+  print('');
+
   // Search packages.
   final searchResponse = await client.searchPackages('win32');
   print('The `win32` query returned ${searchResponse.totalHits} hits. Here are '

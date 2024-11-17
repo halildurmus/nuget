@@ -36,6 +36,7 @@ final class ServiceIndexResponse {
 
 extension ServiceIndexResponseHelpers on ServiceIndexResponse {
   static final version300beta = Version(3, 0, 0, preRelease: ['beta']);
+  static final version300rc = Version(3, 0, 0, preRelease: ['rc']);
   static final version300 = Version(3, 0, 0);
   static final version340 = Version(3, 4, 0);
   static final version350 = Version(3, 5, 0);
@@ -50,6 +51,10 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
     'RegistrationsBaseUrl/$version340',
     'RegistrationsBaseUrl/$version300beta',
     'RegistrationsBaseUrl'
+  ];
+  static final reportAbuseUriTemplateTypes = <String>[
+    'ReportAbuseUriTemplate/$version300rc',
+    'ReportAbuseUriTemplate/$version300beta'
   ];
   static final searchAutocompleteServiceTypes = <String>[
     'SearchAutocompleteService/$version350',
@@ -72,6 +77,10 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
   /// The resource [Uri] for the *Package Metadata* resource.
   Uri get packageMetadataResourceUri =>
       getRequiredResourceUri(registrationsBaseUrlTypes);
+
+  /// The resource [Uri] for the *Report Abuse* resource.
+  Uri? get reportAbuseResourceUri =>
+      getResourceUri(reportAbuseUriTemplateTypes);
 
   /// The resource [Uri] for the *Autocomplete* resource.
   Uri? get searchAutocompleteResourceUri =>

@@ -324,6 +324,15 @@ void main() async {
       });
     });
 
+    group('getReportAbuseUrl', () {
+      test('returns an URL for reporting package abuse', () async {
+        final url = await client.getReportAbuseUrl('Newtonsoft.Json', '13.0.3');
+        check(url.toString()).equals(
+          'https://www.nuget.org/packages/Newtonsoft.Json/13.0.3/ReportAbuse',
+        );
+      });
+    });
+
     group('packageExists', () {
       test('returns true if the package exists', () async {
         await check(client.packageExists('Microsoft.Win32.Registry'))

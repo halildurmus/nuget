@@ -50,6 +50,7 @@ final class NuGetClient {
     final ServiceIndexResponse(
       :packageContentResourceUri,
       :packageMetadataResourceUri,
+      :reportAbuseResourceUri,
       :searchAutocompleteResourceUri,
       :searchQueryResourceUri
     ) = resources;
@@ -69,6 +70,11 @@ final class NuGetClient {
     );
 
     // Optional resources.
+    if (reportAbuseResourceUri != null) {
+      _resourceCache[ReportAbuseResource] =
+          ReportAbuseResource(resourceUri: reportAbuseResourceUri);
+    }
+
     if (searchAutocompleteResourceUri != null) {
       _resourceCache[AutocompleteResource] = AutocompleteResource(
         httpClient: _httpClient,
@@ -275,6 +281,17 @@ final class NuGetClient {
       packageId,
       includePrerelease: includePrerelease,
     );
+  }
+
+  /// Returns the URL for reporting abuse of a package with the [packageId] and
+  /// [version].
+  ///
+  /// Throws a [NuGetServerException] if the server returns a *non-200* status
+  /// code.
+  Future<Uri> getReportAbuseUrl(String packageId, String version) async {
+    if (!_isInitialized) await _initialize();
+    final resource = _getResource<ReportAbuseResource>();
+    return resource.getReportAbuseUrl(packageId, version);
   }
 
   /// Determines whether the package with the [packageId] exists.
