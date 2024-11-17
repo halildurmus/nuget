@@ -20,16 +20,22 @@ _(e.g., **`chore(release): v6.1.0`**)_.
 Open the PR created by the workflow, review the changes, and **merge it** into
 the main branch.
 
-## 3️⃣ Automatic Publishing
+## 3️⃣ Automatic Release and Publishing
 
-Once the PR is merged:
+After merging the PR, the following workflows will automatically be triggered:
 
-- The [Publish] workflow will be triggered automatically.
-- This workflow will:
-  - 📦 **Create** a new release on GitHub with a corresponding Git tag.
-  - 🚀 **Publish** the new package version to [pub.dev].
+### 📦 **Release** Workflow
+
+- The [Release] workflow workflow will **create** a new release on GitHub with
+  the corresponding Git tag.
+
+### 🚀 **Publish** Workflow
+
+- After the Git tag is created, the [Publish] workflow will be triggered to
+  **publish** the new package version to [pub.dev].
 
 [GitHub Actions]: https://github.com/halildurmus/nuget/actions
 [Prepare Release]: https://github.com/halildurmus/nuget/blob/main/.github/workflows/prepare_release.yml
-[Publish]: https://github.com/halildurmus/nuget/blob/main/.github/workflows/publish.yml
 [pub.dev]: https://pub.dev
+[Publish]: https://github.com/halildurmus/nuget/blob/main/.github/workflows/publish.yml
+[Release]: https://github.com/halildurmus/nuget/blob/main/.github/workflows/release.yml
