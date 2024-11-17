@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:version/version.dart';
 
 import '../../exception.dart';
@@ -10,7 +11,14 @@ import 'models/search_response.dart';
 ///
 /// See https://learn.microsoft.com/nuget/api/search-query-service-resource
 final class SearchResource extends NuGetResource {
-  SearchResource({required super.resourceUri, super.httpClient});
+  SearchResource({required super.resourceUri, http.Client? httpClient})
+      : httpClient = httpClient ?? http.Client();
+
+  /// The underlying HTTP client used to make requests.
+  final http.Client httpClient;
+
+  /// Closes the underlying HTTP client.
+  void close() => httpClient.close();
 
   /// Retrieves the packages that match the [query].
   ///

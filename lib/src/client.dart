@@ -48,31 +48,31 @@ final class NuGetClient {
 
     final resources = await serviceIndexResource.get();
     final ServiceIndexResponse(
-      packageContentResourceUri: packageContentResourceUrl,
-      packageMetadataResourceUri: packageMetadataResourceUrl,
-      searchAutocompleteResourceUri: searchAutocompleteResourceUrl,
-      searchQueryResourceUri: searchQueryResourceUrl
+      :packageContentResourceUri,
+      :packageMetadataResourceUri,
+      :searchAutocompleteResourceUri,
+      :searchQueryResourceUri
     ) = resources;
 
     // Required resources.
     _resourceCache[PackageContentResource] = PackageContentResource(
       httpClient: _httpClient,
-      resourceUri: packageContentResourceUrl,
+      resourceUri: packageContentResourceUri,
     );
     _resourceCache[PackageMetadataResource] = PackageMetadataResource(
       httpClient: _httpClient,
-      resourceUri: packageMetadataResourceUrl,
+      resourceUri: packageMetadataResourceUri,
     );
     _resourceCache[SearchResource] = SearchResource(
       httpClient: _httpClient,
-      resourceUri: searchQueryResourceUrl,
+      resourceUri: searchQueryResourceUri,
     );
 
     // Optional resources.
-    if (searchAutocompleteResourceUrl != null) {
+    if (searchAutocompleteResourceUri != null) {
       _resourceCache[AutocompleteResource] = AutocompleteResource(
         httpClient: _httpClient,
-        resourceUri: searchAutocompleteResourceUrl,
+        resourceUri: searchAutocompleteResourceUri,
       );
     }
 
