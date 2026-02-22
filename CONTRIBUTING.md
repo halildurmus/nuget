@@ -70,7 +70,7 @@ before commits.
 
 ### ✅ Running Tests
 
-To run tests for the `package:win32_registry`, use:
+To run tests for the `package:nuget`, use:
 
 ```cmd
 dart test
