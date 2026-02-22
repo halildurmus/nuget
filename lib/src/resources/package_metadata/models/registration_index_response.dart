@@ -7,11 +7,10 @@ class RegistrationIndexResponse {
   RegistrationIndexResponse({required this.count, required this.items});
 
   factory RegistrationIndexResponse.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          'count': final int count,
-          'items': final List<dynamic> itemsVal
-        }) {
+    if (json case {
+      'count': final int count,
+      'items': final List<dynamic> itemsVal,
+    }) {
       final items = itemsVal
           .map((e) => RegistrationIndexPage.fromJson(e as Map<String, dynamic>))
           .toList(growable: false);

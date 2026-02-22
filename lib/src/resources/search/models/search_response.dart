@@ -8,11 +8,10 @@ final class SearchResponse {
   const SearchResponse({required this.totalHits, required this.data});
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          'totalHits': final int totalHits,
-          'data': final List<dynamic> dataVal
-        }) {
+    if (json case {
+      'totalHits': final int totalHits,
+      'data': final List<dynamic> dataVal,
+    }) {
       final data = dataVal
           .map((dynamic e) => SearchEntry.fromJson(e as Map<String, dynamic>))
           .toList();

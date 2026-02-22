@@ -23,9 +23,9 @@ void main() {
 
     test('toString', () {
       final package = AlternatePackage.fromJson(json);
-      check(package.toString()).equals(
-        'AlternatePackage(id: Z.EntityFramework.Extensions, range: *)',
-      );
+      check(
+        package.toString(),
+      ).equals('AlternatePackage(id: Z.EntityFramework.Extensions, range: *)');
     });
   });
 }

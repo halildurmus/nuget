@@ -28,12 +28,11 @@ final class CatalogEntry {
   });
 
   factory CatalogEntry.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          '@id': final String catalogLeafUrl,
-          'id': final String packageId,
-          'version': final String version,
-        }) {
+    if (json case {
+      '@id': final String catalogLeafUrl,
+      'id': final String packageId,
+      'version': final String version,
+    }) {
       final authors = json['authors'] is String
           ? json['authors'] as String
           : (json['authors'] as List<dynamic>).cast<String>().join(',');
@@ -42,7 +41,8 @@ final class CatalogEntry {
           .toList(growable: false);
       final deprecation = json['deprecation'] != null
           ? PackageDeprecation.fromJson(
-              json['deprecation'] as Map<String, dynamic>)
+              json['deprecation'] as Map<String, dynamic>,
+            )
           : null;
       final description = json['description'] as String?;
       final iconUrl = json['iconUrl'] as String?;
@@ -148,7 +148,8 @@ final class CatalogEntry {
   final String? title;
 
   @override
-  String toString() => 'PackageMetadata(catalogLeafUrl: $catalogLeafUrl, '
+  String toString() =>
+      'PackageMetadata(catalogLeafUrl: $catalogLeafUrl, '
       'packageId: $packageId, version: $version, authors: $authors, '
       'dependencyGroups: $dependencyGroups, deprecation: $deprecation, '
       'description: $description, iconUrl: $iconUrl, language: $language, '

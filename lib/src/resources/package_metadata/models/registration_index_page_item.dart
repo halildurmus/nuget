@@ -11,12 +11,11 @@ class RegistrationIndexPageItem {
   });
 
   factory RegistrationIndexPageItem.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          '@id': final String registrationLeafUrl,
-          'catalogEntry': final Map<String, dynamic> catalogEntryVal,
-          'packageContent': final String packageContent
-        }) {
+    if (json case {
+      '@id': final String registrationLeafUrl,
+      'catalogEntry': final Map<String, dynamic> catalogEntryVal,
+      'packageContent': final String packageContent,
+    }) {
       final catalogEntry = CatalogEntry.fromJson(catalogEntryVal);
       return RegistrationIndexPageItem(
         registrationLeafUrl: registrationLeafUrl,

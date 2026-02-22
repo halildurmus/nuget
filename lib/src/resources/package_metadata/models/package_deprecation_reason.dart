@@ -15,11 +15,11 @@ enum PackageDeprecationReason {
 
   /// Returns the enum value from a string [value].
   factory PackageDeprecationReason.fromString(String value) => switch (value) {
-        final v when v.toLowerCase() == 'criticalbugs' => criticalBugs,
-        final v when v.toLowerCase() == 'legacy' => legacy,
-        final v when v.toLowerCase() == 'other' => other,
-        _ => throw ArgumentError.value(value, 'value', 'No enum value.')
-      };
+    final v when v.toLowerCase() == 'criticalbugs' => criticalBugs,
+    final v when v.toLowerCase() == 'legacy' => legacy,
+    final v when v.toLowerCase() == 'other' => other,
+    _ => throw ArgumentError.value(value, 'value', 'No enum value.'),
+  };
 
   final String value;
 }

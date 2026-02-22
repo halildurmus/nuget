@@ -16,30 +16,41 @@ void main() async {
       );
     });
 
+    tearDownAll(() => resource.close());
+
     test('get returns all resources', () async {
       final serviceIndexResponse = await resource.get();
       check(serviceIndexResponse)
         ..has((e) => e.version, 'version').equals('3.0.0')
         ..has((e) => e.resources, 'resources').isNotEmpty()
         ..has((e) => e.catalogResourceUri, 'catalogResourceUri').isNotNull()
-        ..has((e) => e.packageContentResourceUri, 'packageContentResourceUri')
-            .isNotNull()
-        ..has((e) => e.packageMetadataResourceUri, 'packageMetadataResourceUri')
-            .isNotNull()
-        ..has((e) => e.searchAutocompleteResourceUri,
-                'searchAutocompleteResourceUri')
-            .isNotNull()
-        ..has((e) => e.searchQueryResourceUri, 'searchQueryResourceUri')
-            .isNotNull();
-      check(() => serviceIndexResponse
-              .getRequiredResourceUri(['NonExistingResource']))
-          .throws<NuGetServerException>()
+        ..has(
+          (e) => e.packageContentResourceUri,
+          'packageContentResourceUri',
+        ).isNotNull()
+        ..has(
+          (e) => e.packageMetadataResourceUri,
+          'packageMetadataResourceUri',
+        ).isNotNull()
+        ..has(
+          (e) => e.searchAutocompleteResourceUri,
+          'searchAutocompleteResourceUri',
+        ).isNotNull()
+        ..has(
+          (e) => e.searchQueryResourceUri,
+          'searchQueryResourceUri',
+        ).isNotNull();
+      check(
+          () => serviceIndexResponse.getRequiredResourceUri([
+            'NonExistingResource',
+          ]),
+        ).throws<NuGetServerException>()
         ..has((e) => e.message, 'message').equals(
-            'The service index does not have a resource named `NonExistingResource`.')
+          'The service index does not have a resource named `NonExistingResource`.',
+        )
         ..has((e) => e.toString(), 'toString').equals(
-            'NuGetServerException: The service index does not have a resource named `NonExistingResource`.');
+          'NuGetServerException: The service index does not have a resource named `NonExistingResource`.',
+        );
     });
-
-    tearDownAll(() => resource.close());
   });
 }

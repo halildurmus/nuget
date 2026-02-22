@@ -14,7 +14,7 @@ import 'models/registration_page_response.dart';
 /// See https://learn.microsoft.com/nuget/api/registration-base-url-resource
 final class PackageMetadataResource extends NuGetResource {
   PackageMetadataResource({required super.resourceUri, http.Client? httpClient})
-      : httpClient = httpClient ?? http.Client();
+    : httpClient = httpClient ?? http.Client();
 
   /// The underlying HTTP client used to make requests.
   final http.Client httpClient;
@@ -32,17 +32,19 @@ final class PackageMetadataResource extends NuGetResource {
     String packageId,
   ) async {
     final id = packageId.toLowerCase();
-    final uri = resourceUri
-        .replace(pathSegments: [...resourceUri.pathSegments, id, 'index.json']);
+    final uri = resourceUri.replace(
+      pathSegments: [...resourceUri.pathSegments, id, 'index.json'],
+    );
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
       200 => RegistrationIndexResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>),
+        json.decode(response.body) as Map<String, dynamic>,
+      ),
       _ => throw NuGetServerException(
-          'Failed to get registration index: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get registration index: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 
@@ -55,11 +57,12 @@ final class PackageMetadataResource extends NuGetResource {
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       200 => RegistrationPageResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>),
+        json.decode(response.body) as Map<String, dynamic>,
+      ),
       _ => throw NuGetServerException(
-          'Failed to get registration page: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get registration page: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 
@@ -72,11 +75,12 @@ final class PackageMetadataResource extends NuGetResource {
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       200 => RegistrationLeafResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>),
+        json.decode(response.body) as Map<String, dynamic>,
+      ),
       _ => throw NuGetServerException(
-          'Failed to get registration leaf: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get registration leaf: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 }

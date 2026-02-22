@@ -6,8 +6,10 @@ void main() async {
 
   // Autocomplete package IDs.
   final autocompleteResponse = await client.autocompletePackageIds('json');
-  print('The `json` query returned ${autocompleteResponse.totalHits} hits. '
-      'Here are the first 20 results:');
+  print(
+    'The `json` query returned ${autocompleteResponse.totalHits} hits. '
+    'Here are the first 20 results:',
+  );
   for (final packageId in autocompleteResponse.data) {
     print(' - $packageId');
   }
@@ -15,13 +17,17 @@ void main() async {
   print('');
 
   // Download package content (.nupkg).
-  final content =
-      await client.downloadPackageContent('Newtonsoft.Json', version: '13.0.3');
+  final content = await client.downloadPackageContent(
+    'Newtonsoft.Json',
+    version: '13.0.3',
+  );
   print('`Newtonsoft.Json` package size: ${content.length} bytes');
 
   // Download package manifest (.nuspec).
-  final manifest = await client.downloadPackageManifest('Newtonsoft.Json',
-      version: '13.0.3');
+  final manifest = await client.downloadPackageManifest(
+    'Newtonsoft.Json',
+    version: '13.0.3',
+  );
   print('`Newtonsoft.Json` manifest size: ${manifest.length} bytes');
 
   print('');
@@ -43,8 +49,10 @@ void main() async {
   print('');
 
   // Get package metadata.
-  final metadata =
-      await client.getPackageMetadata('Newtonsoft.Json', version: '13.0.3');
+  final metadata = await client.getPackageMetadata(
+    'Newtonsoft.Json',
+    version: '13.0.3',
+  );
   print('`Newtonsoft.Json` (13.0.3) metadata:');
   print(' - Version: ${metadata.version}');
   print(' - Description: ${metadata.description}');
@@ -68,16 +76,20 @@ void main() async {
   print('');
 
   // Get report abuse URL.
-  final reportAbuseUrl =
-      await client.getReportAbuseUrl('Newtonsoft.Json', '13.0.3');
+  final reportAbuseUrl = await client.getReportAbuseUrl(
+    'Newtonsoft.Json',
+    '13.0.3',
+  );
   print('Report abuse URL for `Newtonsoft.Json` (13.0.3): $reportAbuseUrl');
 
   print('');
 
   // Search packages.
   final searchResponse = await client.searchPackages('win32');
-  print('The `win32` query returned ${searchResponse.totalHits} hits. Here are '
-      'the first 20 results:');
+  print(
+    'The `win32` query returned ${searchResponse.totalHits} hits. Here are '
+    'the first 20 results:',
+  );
   for (final package in searchResponse.data) {
     print(' - ${package.packageId} (${package.version})');
   }

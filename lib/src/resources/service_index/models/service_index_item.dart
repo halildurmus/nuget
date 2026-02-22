@@ -9,11 +9,16 @@ final class ServiceIndexItem {
   });
 
   factory ServiceIndexItem.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {'@id': final String resourceUrl, '@type': final String type}) {
+    if (json case {
+      '@id': final String resourceUrl,
+      '@type': final String type,
+    }) {
       final comment = json['comment'] as String?;
       return ServiceIndexItem(
-          resourceUrl: resourceUrl, type: type, comment: comment);
+        resourceUrl: resourceUrl,
+        type: type,
+        comment: comment,
+      );
     }
     throw FormatException('Invalid JSON: $json');
   }

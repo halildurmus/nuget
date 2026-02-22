@@ -14,16 +14,17 @@ class RegistrationIndexPage {
   });
 
   factory RegistrationIndexPage.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          '@id': final String registrationPageUrl,
-          'count': final int count,
-          'lower': final String lower,
-          'upper': final String upper
-        }) {
+    if (json case {
+      '@id': final String registrationPageUrl,
+      'count': final int count,
+      'lower': final String lower,
+      'upper': final String upper,
+    }) {
       final items = (json['items'] as List<dynamic>?)
-          ?.map((e) =>
-              RegistrationIndexPageItem.fromJson(e as Map<String, dynamic>))
+          ?.map(
+            (e) =>
+                RegistrationIndexPageItem.fromJson(e as Map<String, dynamic>),
+          )
           .toList(growable: false);
       final parent = json['parent'] as String?;
       return RegistrationIndexPage(

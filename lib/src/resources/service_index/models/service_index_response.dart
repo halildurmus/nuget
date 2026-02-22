@@ -10,11 +10,10 @@ final class ServiceIndexResponse {
   const ServiceIndexResponse({required this.version, required this.resources});
 
   factory ServiceIndexResponse.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          'version': final String version,
-          'resources': final List<dynamic> resourcesVal
-        }) {
+    if (json case {
+      'version': final String version,
+      'resources': final List<dynamic> resourcesVal,
+    }) {
       final resources = resourcesVal
           .map((e) => ServiceIndexItem.fromJson(e as Map<String, dynamic>))
           .toList(growable: false);
@@ -44,27 +43,27 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
 
   static final catalogTypes = <String>['Catalog/$version300'];
   static final packageBaseAddressTypes = <String>[
-    'PackageBaseAddress/$version300'
+    'PackageBaseAddress/$version300',
   ];
   static final registrationsBaseUrlTypes = <String>[
     'RegistrationsBaseUrl/$version360',
     'RegistrationsBaseUrl/$version340',
     'RegistrationsBaseUrl/$version300beta',
-    'RegistrationsBaseUrl'
+    'RegistrationsBaseUrl',
   ];
   static final reportAbuseUriTemplateTypes = <String>[
     'ReportAbuseUriTemplate/$version300rc',
-    'ReportAbuseUriTemplate/$version300beta'
+    'ReportAbuseUriTemplate/$version300beta',
   ];
   static final searchAutocompleteServiceTypes = <String>[
     'SearchAutocompleteService/$version350',
     'SearchAutocompleteService/$version300beta',
-    'SearchAutocompleteService'
+    'SearchAutocompleteService',
   ];
   static final searchQueryServiceTypes = <String>[
     'SearchQueryService/$version350',
     'SearchQueryService/$version300beta',
-    'SearchQueryService'
+    'SearchQueryService',
   ];
 
   /// The resource [Uri] for the *Catalog* resource.
@@ -113,7 +112,7 @@ extension ServiceIndexResponseHelpers on ServiceIndexResponse {
 
       final resourceUrl = switch (resource.resourceUrl) {
         final url when url.endsWith('/') => url.substring(0, url.length - 1),
-        _ => resource.resourceUrl
+        _ => resource.resourceUrl,
       };
       return Uri.parse(resourceUrl);
     }

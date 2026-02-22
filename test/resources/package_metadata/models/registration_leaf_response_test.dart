@@ -15,21 +15,26 @@ void main() {
           'https://api.nuget.org/v3-flatcontainer/serilog/0.1.6/serilog.0.1.6.nupkg',
       'published': '2013-03-23T06:36:30.573+00:00',
       'registration':
-          'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json'
+          'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json',
     };
 
     test('fromJson creates RegistrationLeafResponse successfully', () {
       final response = RegistrationLeafResponse.fromJson(json);
       check(response)
         ..has((e) => e.catalogEntry, 'catalogEntry').equals(
-            'https://api.nuget.org/v3/catalog0/data/2018.10.15.02.05.02/serilog.0.1.6.json')
+          'https://api.nuget.org/v3/catalog0/data/2018.10.15.02.05.02/serilog.0.1.6.json',
+        )
         ..has((e) => e.listed, 'listed').equals(true)
         ..has((e) => e.packageContent, 'packageContent').equals(
-            'https://api.nuget.org/v3-flatcontainer/serilog/0.1.6/serilog.0.1.6.nupkg')
-        ..has((e) => e.published, 'published')
-            .equals(DateTime.parse('2013-03-23T06:36:30.573+00:00'))
+          'https://api.nuget.org/v3-flatcontainer/serilog/0.1.6/serilog.0.1.6.nupkg',
+        )
+        ..has(
+          (e) => e.published,
+          'published',
+        ).equals(DateTime.parse('2013-03-23T06:36:30.573+00:00'))
         ..has((e) => e.registration, 'registration').equals(
-            'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json');
+          'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json',
+        );
     });
 
     test('fromJson throws FormatException if provided json is invalid', () {

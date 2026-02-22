@@ -12,7 +12,7 @@ import 'models/search_response.dart';
 /// See https://learn.microsoft.com/nuget/api/search-query-service-resource
 final class SearchResource extends NuGetResource {
   SearchResource({required super.resourceUri, http.Client? httpClient})
-      : httpClient = httpClient ?? http.Client();
+    : httpClient = httpClient ?? http.Client();
 
   /// The underlying HTTP client used to make requests.
   final http.Client httpClient;
@@ -53,7 +53,7 @@ final class SearchResource extends NuGetResource {
 
     final uri = resourceUri.replace(
       queryParameters: {
-        if (query != null) 'q': query,
+        'q': ?query,
         if (skip != null) 'skip': '$skip',
         if (take != null) 'take': '$take',
         'prerelease': '$includePrerelease',
@@ -63,12 +63,12 @@ final class SearchResource extends NuGetResource {
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       200 => SearchResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>,
-        ),
+        json.decode(response.body) as Map<String, dynamic>,
+      ),
       _ => throw NuGetServerException(
-          'Failed to get search packages response: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get search packages response: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 }

@@ -54,7 +54,8 @@ class RegistrationLeafResponse {
   final String? registration;
 
   @override
-  String toString() => 'RegistrationLeafResponse('
+  String toString() =>
+      'RegistrationLeafResponse('
       'registrationLeafUrl: $registrationLeafUrl, catalogEntry: $catalogEntry, '
       'listed: $listed, packageContent: $packageContent, '
       'published: $published, registration: $registration)';

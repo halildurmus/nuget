@@ -21,6 +21,7 @@ final class DependencyGroupItem {
   final List<DependencyItem>? dependencies;
 
   @override
-  String toString() => 'DependencyGroupItem(targetFramework: $targetFramework, '
+  String toString() =>
+      'DependencyGroupItem(targetFramework: $targetFramework, '
       'dependencies: $dependencies)';
 }

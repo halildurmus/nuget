@@ -23,6 +23,7 @@ final class DependencyItem {
   final String? registration;
 
   @override
-  String toString() => 'DependencyItem(id: $id, range: $range, '
+  String toString() =>
+      'DependencyItem(id: $id, range: $range, '
       'registration: $registration)';
 }

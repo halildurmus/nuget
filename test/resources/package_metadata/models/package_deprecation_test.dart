@@ -11,9 +11,11 @@ void main() {
 
     test('fromJson creates PackageDeprecation successfully', () {
       final deprecation = PackageDeprecation.fromJson(json);
-      check(deprecation.reasons).which((it) => it
-        ..length.equals(1)
-        ..contains(PackageDeprecationReason.legacy));
+      check(deprecation.reasons).which(
+        (it) => it
+          ..length.equals(1)
+          ..contains(PackageDeprecationReason.legacy),
+      );
       final altenatePackage = deprecation.alternatePackage!;
       check(altenatePackage)
         ..has((e) => e.id, 'id').equals('Z.EntityFramework.Extensions')

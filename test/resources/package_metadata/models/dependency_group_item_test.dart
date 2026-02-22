@@ -11,8 +11,8 @@ void main() {
           'range': '[2.14.0, )',
           'registration':
               'https://api.nuget.org/v3/registration-sample/nuget.core/index.json',
-        }
-      ]
+        },
+      ],
     };
 
     test('fromJson creates DependencyGroupItem successfully', () {
@@ -24,8 +24,8 @@ void main() {
         ..has((e) => e.id, 'id').equals('NuGet.Core')
         ..has((e) => e.range, 'range').isNotNull().equals('[2.14.0, )')
         ..has((e) => e.registration, 'registration').isNotNull().equals(
-              'https://api.nuget.org/v3/registration-sample/nuget.core/index.json',
-            );
+          'https://api.nuget.org/v3/registration-sample/nuget.core/index.json',
+        );
     });
 
     test('toString', () {

@@ -9,12 +9,11 @@ final class VersionItem {
   });
 
   factory VersionItem.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          '@id': final String registrationLeafUrl,
-          'version': final String version,
-          'downloads': final int downloads
-        }) {
+    if (json case {
+      '@id': final String registrationLeafUrl,
+      'version': final String version,
+      'downloads': final int downloads,
+    }) {
       return VersionItem(
         registrationLeafUrl: registrationLeafUrl,
         version: version,
@@ -35,6 +34,7 @@ final class VersionItem {
   final int downloads;
 
   @override
-  String toString() => 'VersionItem(registrationLeafUrl: $registrationLeafUrl, '
+  String toString() =>
+      'VersionItem(registrationLeafUrl: $registrationLeafUrl, '
       'version: $version, downloads: $downloads)';
 }

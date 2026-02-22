@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2026-02-22
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[0.2.1]: https://github.com/halildurmus/nuget/compare/v0.2.0..nuget-v0.2.1
+
 ## [0.2.0] - 2024-11-17
 
 ### 🚀 Features

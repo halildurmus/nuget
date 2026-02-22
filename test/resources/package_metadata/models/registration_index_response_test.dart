@@ -10,7 +10,7 @@ void main() {
       '@type': [
         'catalog:CatalogRoot',
         'PackageRegistration',
-        'catalog:Permalink'
+        'catalog:Permalink',
       ],
       'commitId': '5ee02ce6-ebb4-4082-a53e-970ae44706fe',
       'commitTimeStamp': '2023-04-12T05:19:09.2263596+00:00',
@@ -58,14 +58,14 @@ void main() {
                   {
                     'advisoryUrl':
                         'https://github.com/advisories/GHSA-5crp-9r3c-p9vr',
-                    'severity': '2'
-                  }
-                ]
+                    'severity': '2',
+                  },
+                ],
               },
               'packageContent':
                   'https://api.nuget.org/v3-flatcontainer/newtonsoft.json/3.5.8/newtonsoft.json.3.5.8.nupkg',
               'registration':
-                  'https://api.nuget.org/v3/registration5-gz-semver2/newtonsoft.json/index.json'
+                  'https://api.nuget.org/v3/registration5-gz-semver2/newtonsoft.json/index.json',
             },
             {
               '@id':
@@ -101,22 +101,22 @@ void main() {
                   {
                     'advisoryUrl':
                         'https://github.com/advisories/GHSA-5crp-9r3c-p9vr',
-                    'severity': '2'
-                  }
-                ]
+                    'severity': '2',
+                  },
+                ],
               },
               'packageContent':
                   'https://api.nuget.org/v3-flatcontainer/newtonsoft.json/4.0.1/newtonsoft.json.4.0.1.nupkg',
               'registration':
-                  'https://api.nuget.org/v3/registration5-gz-semver2/newtonsoft.json/index.json'
+                  'https://api.nuget.org/v3/registration5-gz-semver2/newtonsoft.json/index.json',
             },
           ],
           'parent':
               'https://api.nuget.org/v3/registration5-gz-semver2/newtonsoft.json/index.json',
           'lower': '3.5.8',
-          'upper': '4.0.1'
+          'upper': '4.0.1',
         },
-      ]
+      ],
     };
 
     test('fromJson creates RegistrationIndexResponse successfully', () {

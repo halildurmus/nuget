@@ -8,31 +8,39 @@ void main() async {
 
     setUpAll(() async {
       final serviceIndexResource = ServiceIndexResource(
-          resourceUri: ServiceIndexResource.nugetOrgServiceIndex);
+        resourceUri: ServiceIndexResource.nugetOrgServiceIndex,
+      );
       final ServiceIndexResponse(:packageMetadataResourceUri) =
           await serviceIndexResource.get();
       serviceIndexResource.close();
-      return resource =
-          PackageMetadataResource(resourceUri: packageMetadataResourceUri);
+      return resource = PackageMetadataResource(
+        resourceUri: packageMetadataResourceUri,
+      );
     });
 
-    test('getRegistrationIndex retrieves the registration index for a package',
-        () async {
-      final response = await resource.getRegistrationIndex('Newtonsoft.Json');
-      check(response)
-        ..has((e) => e.count, 'count').equals(2)
-        ..has((e) => e.items, 'items').isNotEmpty();
-    });
+    tearDownAll(() => resource.close());
 
     test(
-        'getRegistrationIndex retrieves the registration index for a deprecated package',
-        () async {
-      final response =
-          await resource.getRegistrationIndex('EntityFramework.MappingAPI');
-      check(response)
-        ..has((e) => e.count, 'count').equals(1)
-        ..has((e) => e.items, 'items').isNotEmpty();
-    });
+      'getRegistrationIndex retrieves the registration index for a package',
+      () async {
+        final response = await resource.getRegistrationIndex('Newtonsoft.Json');
+        check(response)
+          ..has((e) => e.count, 'count').equals(2)
+          ..has((e) => e.items, 'items').isNotEmpty();
+      },
+    );
+
+    test(
+      'getRegistrationIndex retrieves the registration index for a deprecated package',
+      () async {
+        final response = await resource.getRegistrationIndex(
+          'EntityFramework.MappingAPI',
+        );
+        check(response)
+          ..has((e) => e.count, 'count').equals(1)
+          ..has((e) => e.items, 'items').isNotEmpty();
+      },
+    );
 
     test('getRegistrationPage retrieves the registration page', () async {
       final registrationIndex = await resource.getRegistrationIndex('Serilog');
@@ -54,10 +62,10 @@ void main() async {
         ..has((e) => e.catalogEntry, 'catalogEntry').isNotNull()
         ..has((e) => e.listed, 'listed').isNotNull().isTrue()
         ..has((e) => e.published, 'published').isNotNull()
-        ..has((e) => e.registrationLeafUrl, 'registrationLeafUrl')
-            .equals(leafUrl);
+        ..has(
+          (e) => e.registrationLeafUrl,
+          'registrationLeafUrl',
+        ).equals(leafUrl);
     });
-
-    tearDownAll(() => resource.close());
   });
 }
