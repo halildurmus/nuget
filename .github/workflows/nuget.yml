@@ -19,7 +19,10 @@ jobs:
   build:
     uses: halildurmus/workflows/.github/workflows/dart.yml@main
     with:
+      check_coverage: true
       format_directories: lib test
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main

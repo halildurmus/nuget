@@ -23,12 +23,11 @@ final class SearchEntry {
   });
 
   factory SearchEntry.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          'id': final String packageId,
-          'version': final String version,
-          'versions': final List<dynamic> versionsVal,
-        }) {
+    if (json case {
+      'id': final String packageId,
+      'version': final String version,
+      'versions': final List<dynamic> versionsVal,
+    }) {
       final versions = versionsVal
           .map((e) => VersionItem.fromJson(e as Map<String, dynamic>))
           .toList();
@@ -41,8 +40,8 @@ final class SearchEntry {
       final owners = json['owners'] == null
           ? null
           : json['owners'] is String
-              ? json['owners'] as String
-              : (json['owners'] as List<dynamic>).cast<String>().join(',');
+          ? json['owners'] as String
+          : (json['owners'] as List<dynamic>).cast<String>().join(',');
       final projectUrl = json['projectUrl'] as String?;
       final registration = json['registration'] as String?;
       final summary = json['summary'] as String?;
@@ -119,7 +118,8 @@ final class SearchEntry {
   final bool? verified;
 
   @override
-  String toString() => 'SearchEntry(packageId: $packageId, version: $version, '
+  String toString() =>
+      'SearchEntry(packageId: $packageId, version: $version, '
       'versions: $versions, description: $description, authors: $authors, '
       'iconUrl: $iconUrl, licenseUrl: $licenseUrl, owners: $owners, '
       'projectUrl: $projectUrl, registration: $registration, '

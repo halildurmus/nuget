@@ -20,7 +20,8 @@ final class PackageDeprecation {
       final message = json['message'] as String?;
       final alternatePackage = json['alternatePackage'] != null
           ? AlternatePackage.fromJson(
-              json['alternatePackage'] as Map<String, dynamic>)
+              json['alternatePackage'] as Map<String, dynamic>,
+            )
           : null;
       return PackageDeprecation(
         reasons: reasons,

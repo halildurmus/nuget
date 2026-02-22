@@ -12,7 +12,7 @@ import '../resource.dart';
 /// See https://learn.microsoft.com/nuget/api/package-base-address-resource
 final class PackageContentResource extends NuGetResource {
   PackageContentResource({required super.resourceUri, http.Client? httpClient})
-      : httpClient = httpClient ?? http.Client();
+    : httpClient = httpClient ?? http.Client();
 
   /// The underlying HTTP client used to make requests.
   final http.Client httpClient;
@@ -33,20 +33,22 @@ final class PackageContentResource extends NuGetResource {
     required String version,
   }) async {
     final id = packageId.toLowerCase();
-    final uri = resourceUri.replace(pathSegments: [
-      ...resourceUri.pathSegments,
-      id,
-      version,
-      '$id.$version.nupkg'
-    ]);
+    final uri = resourceUri.replace(
+      pathSegments: [
+        ...resourceUri.pathSegments,
+        id,
+        version,
+        '$id.$version.nupkg',
+      ],
+    );
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
       200 => response.bodyBytes,
       _ => throw NuGetServerException(
-          'Failed to download package content: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to download package content: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 
@@ -64,15 +66,16 @@ final class PackageContentResource extends NuGetResource {
   }) async {
     final id = packageId.toLowerCase();
     final uri = resourceUri.replace(
-        pathSegments: [...resourceUri.pathSegments, id, version, '$id.nuspec']);
+      pathSegments: [...resourceUri.pathSegments, id, version, '$id.nuspec'],
+    );
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
       200 => response.bodyBytes,
       _ => throw NuGetServerException(
-          'Failed to download package manifest: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to download package manifest: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 
@@ -87,18 +90,20 @@ final class PackageContentResource extends NuGetResource {
   /// code.
   Future<List<String>> getPackageVersions(String packageId) async {
     final id = packageId.toLowerCase();
-    final uri = resourceUri
-        .replace(pathSegments: [...resourceUri.pathSegments, id, 'index.json']);
+    final uri = resourceUri.replace(
+      pathSegments: [...resourceUri.pathSegments, id, 'index.json'],
+    );
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       404 => throw PackageNotFoundException(packageId),
-      200 => ((json.decode(response.body) as Map<dynamic, dynamic>)['versions']
-              as List<dynamic>)
-          .cast<String>(),
+      200 =>
+        ((json.decode(response.body) as Map<dynamic, dynamic>)['versions']
+                as List<dynamic>)
+            .cast<String>(),
       _ => throw NuGetServerException(
-          'Failed to get package versions: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get package versions: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 }

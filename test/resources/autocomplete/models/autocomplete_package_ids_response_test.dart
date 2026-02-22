@@ -6,19 +6,18 @@ void main() {
   group('AutocompletePackageIdsResponse', () {
     const json = {
       'totalHits': 2,
-      'data': [
-        'Newtonsoft.Json',
-        'Newtonsoft.Json.Schema',
-      ]
+      'data': ['Newtonsoft.Json', 'Newtonsoft.Json.Schema'],
     };
 
     test('fromJson creates AutocompletePackageIdsResponse successfully', () {
       final response = AutocompletePackageIdsResponse.fromJson(json);
       check(response.totalHits).equals(2);
-      check(response.data).which((it) => it
-        ..length.equals(2)
-        ..contains('Newtonsoft.Json')
-        ..contains('Newtonsoft.Json.Schema'));
+      check(response.data).which(
+        (it) => it
+          ..length.equals(2)
+          ..contains('Newtonsoft.Json')
+          ..contains('Newtonsoft.Json.Schema'),
+      );
     });
 
     test('fromJson throws FormatException if provided json is invalid', () {

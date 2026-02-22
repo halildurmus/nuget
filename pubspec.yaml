@@ -1,8 +1,12 @@
 name: nuget
-description: A Dart package that allows interaction with the NuGet Server API.
-version: 0.2.0
+description: >
+  A lightweight Dart client for querying and interacting with the
+  NuGet Server API.
+version: 0.2.1
 repository: https://github.com/halildurmus/nuget
 issue_tracker: https://github.com/halildurmus/nuget/issues
+funding:
+  - https://github.com/sponsors/halildurmus
 
 topics:
   - nuget
@@ -11,20 +15,14 @@ topics:
   - api
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.11.0
 
 dependencies:
-  http: ^1.2.2
+  http: ^1.6.0
   version: ^3.0.2
 
 dev_dependencies:
-  checks: ^0.3.0
-  hooks:
-    git:
-      url: https://github.com/halildurmus/workflows.git
-      path: packages/hooks
-  lints:
-    git:
-      url: https://github.com/halildurmus/workflows.git
-      path: packages/lints
-  test: ^1.25.8
+  checks: ^0.3.1
+  halildurmus_hooks: ^0.1.1
+  halildurmus_lints: ^2.0.0
+  test: ^1.29.0

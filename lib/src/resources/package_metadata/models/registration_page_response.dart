@@ -15,18 +15,19 @@ final class RegistrationPageResponse extends RegistrationIndexPage {
   });
 
   factory RegistrationPageResponse.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          '@id': final String registrationPageUrl,
-          'count': final int count,
-          'items': final List<dynamic> itemsVal,
-          'lower': final String lower,
-          'parent': final String parent,
-          'upper': final String upper
-        }) {
+    if (json case {
+      '@id': final String registrationPageUrl,
+      'count': final int count,
+      'items': final List<dynamic> itemsVal,
+      'lower': final String lower,
+      'parent': final String parent,
+      'upper': final String upper,
+    }) {
       final items = itemsVal
-          .map((e) =>
-              RegistrationIndexPageItem.fromJson(e as Map<String, dynamic>))
+          .map(
+            (e) =>
+                RegistrationIndexPageItem.fromJson(e as Map<String, dynamic>),
+          )
           .toList(growable: false);
       return RegistrationPageResponse(
         registrationPageUrl: registrationPageUrl,

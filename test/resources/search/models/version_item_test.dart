@@ -15,7 +15,8 @@ void main() {
       final item = VersionItem.fromJson(json);
       check(item)
         ..has((e) => e.registrationLeafUrl, 'registrationLeafUrl').equals(
-            'https://api.nuget.org/v3/registration-sample/nuget.versioning/3.3.0.json')
+          'https://api.nuget.org/v3/registration-sample/nuget.versioning/3.3.0.json',
+        )
         ..has((e) => e.version, 'version').equals('3.3.0')
         ..has((e) => e.downloads, 'downloads').equals(50343);
     });

@@ -19,34 +19,34 @@ void main() {
       'totalDownloads': 141896,
       'verified': true,
       'packageTypes': [
-        {'name': 'Dependency'}
+        {'name': 'Dependency'},
       ],
       'versions': [
         {
           'version': '3.3.0',
           'downloads': 50343,
           '@id':
-              'https://api.nuget.org/v3/registration-sample/nuget.versioning/3.3.0.json'
+              'https://api.nuget.org/v3/registration-sample/nuget.versioning/3.3.0.json',
         },
         {
           'version': '3.4.3',
           'downloads': 27932,
           '@id':
-              'https://api.nuget.org/v3/registration-sample/nuget.versioning/3.4.3.json'
+              'https://api.nuget.org/v3/registration-sample/nuget.versioning/3.4.3.json',
         },
         {
           'version': '4.0.0',
           'downloads': 63004,
           '@id':
-              'https://api.nuget.org/v3/registration-sample/nuget.versioning/4.0.0.json'
+              'https://api.nuget.org/v3/registration-sample/nuget.versioning/4.0.0.json',
         },
         {
           'version': '4.4.0',
           'downloads': 617,
           '@id':
-              'https://api.nuget.org/v3/registration-sample/nuget.versioning/4.4.0.json'
-        }
-      ]
+              'https://api.nuget.org/v3/registration-sample/nuget.versioning/4.4.0.json',
+        },
+      ],
     };
 
     test('fromJson creates SearchEntry successfully', () {
@@ -55,8 +55,10 @@ void main() {
         ..has((e) => e.packageId, 'packageId').equals('NuGet.Versioning')
         ..has((e) => e.version, 'version').equals('4.4.0')
         ..has((e) => e.versions, 'versions').isNotEmpty()
-        ..has((e) => e.description, 'description')
-            .equals("NuGet's implementation of Semantic Versioning.")
+        ..has(
+          (e) => e.description,
+          'description',
+        ).equals("NuGet's implementation of Semantic Versioning.")
         ..has((e) => e.authors, 'authors').equals('NuGet')
         ..has((e) => e.iconUrl, 'iconUrl').isNull()
         ..has((e) => e.verified, 'verified').isNotNull().isTrue();

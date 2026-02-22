@@ -13,12 +13,14 @@ void main() {
     test('fromJson creates ServiceIndexItem successfully', () {
       final item = ServiceIndexItem.fromJson(json);
       check(item)
-        ..has((e) => e.resourceUrl, 'resourceUrl')
-            .equals('https://azuresearch-usnc.nuget.org/query')
+        ..has(
+          (e) => e.resourceUrl,
+          'resourceUrl',
+        ).equals('https://azuresearch-usnc.nuget.org/query')
         ..has((e) => e.type, 'type').equals('SearchQueryService')
-        ..has((e) => e.comment, 'comment')
-            .isNotNull()
-            .equals('Query endpoint of NuGet Search service (primary)');
+        ..has((e) => e.comment, 'comment').isNotNull().equals(
+          'Query endpoint of NuGet Search service (primary)',
+        );
     });
 
     test('fromJson throws FormatException if provided json is invalid', () {

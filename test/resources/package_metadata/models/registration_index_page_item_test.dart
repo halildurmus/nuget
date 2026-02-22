@@ -31,21 +31,23 @@ void main() {
         'summary': '',
         'tags': [''],
         'title': '',
-        'version': '0.1.6'
+        'version': '0.1.6',
       },
       'packageContent':
           'https://api.nuget.org/v3-flatcontainer/serilog/0.1.6/serilog.0.1.6.nupkg',
       'registration':
-          'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json'
+          'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json',
     };
 
     test('fromJson creates RegistrationIndexPageItem successfully', () {
       final item = RegistrationIndexPageItem.fromJson(json);
       check(item)
         ..has((e) => e.registrationLeafUrl, 'registrationLeafUrl').equals(
-            'https://api.nuget.org/v3/registration5-gz-semver2/serilog/0.1.6.json')
+          'https://api.nuget.org/v3/registration5-gz-semver2/serilog/0.1.6.json',
+        )
         ..has((e) => e.packageContent, 'packageContent').equals(
-            'https://api.nuget.org/v3-flatcontainer/serilog/0.1.6/serilog.0.1.6.nupkg');
+          'https://api.nuget.org/v3-flatcontainer/serilog/0.1.6/serilog.0.1.6.nupkg',
+        );
       check(item.catalogEntry)
         ..has((e) => e.packageId, 'packageId').equals('Serilog')
         ..has((e) => e.version, 'version').equals('0.1.6');

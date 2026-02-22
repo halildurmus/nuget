@@ -27,9 +27,9 @@ final class NuGetClient {
   /// failing to do so can cause the Dart process to hang. You can close the
   /// [httpClient] by calling the [close] method.
   NuGetClient({http.Client? httpClient, Uri? serviceIndexUri})
-      : _httpClient = httpClient ?? http.Client(),
-        _serviceIndexUri =
-            serviceIndexUri ?? ServiceIndexResource.nugetOrgServiceIndex;
+    : _httpClient = httpClient ?? http.Client(),
+      _serviceIndexUri =
+          serviceIndexUri ?? ServiceIndexResource.nugetOrgServiceIndex;
 
   final http.Client _httpClient;
   final Uri _serviceIndexUri;
@@ -52,7 +52,7 @@ final class NuGetClient {
       :packageMetadataResourceUri,
       :reportAbuseResourceUri,
       :searchAutocompleteResourceUri,
-      :searchQueryResourceUri
+      :searchQueryResourceUri,
     ) = resources;
 
     // Required resources.
@@ -71,8 +71,9 @@ final class NuGetClient {
 
     // Optional resources.
     if (reportAbuseResourceUri != null) {
-      _resourceCache[ReportAbuseResource] =
-          ReportAbuseResource(resourceUri: reportAbuseResourceUri);
+      _resourceCache[ReportAbuseResource] = ReportAbuseResource(
+        resourceUri: reportAbuseResourceUri,
+      );
     }
 
     if (searchAutocompleteResourceUri != null) {
@@ -178,8 +179,9 @@ final class NuGetClient {
       // `null` items.
       var items = registrationIndexPage.items;
       if (items == null) {
-        final externalRegistrationPage = await resource
-            .getRegistrationPage(registrationIndexPage.registrationPageUrl);
+        final externalRegistrationPage = await resource.getRegistrationPage(
+          registrationIndexPage.registrationPageUrl,
+        );
         if (externalRegistrationPage.items == null) continue;
         items = externalRegistrationPage.items;
       }
@@ -243,8 +245,9 @@ final class NuGetClient {
       // `null` items.
       var items = registrationIndexPage.items;
       if (items == null) {
-        final externalRegistrationPage = await resource
-            .getRegistrationPage(registrationIndexPage.registrationPageUrl);
+        final externalRegistrationPage = await resource.getRegistrationPage(
+          registrationIndexPage.registrationPageUrl,
+        );
         if (externalRegistrationPage.items == null) continue;
         items = externalRegistrationPage.items;
       }

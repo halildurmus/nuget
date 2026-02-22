@@ -9,11 +9,10 @@ final class AutocompletePackageIdsResponse {
   });
 
   factory AutocompletePackageIdsResponse.fromJson(Map<String, dynamic> json) {
-    if (json
-        case {
-          'totalHits': final int totalHits,
-          'data': final List<dynamic> data
-        }) {
+    if (json case {
+      'totalHits': final int totalHits,
+      'data': final List<dynamic> data,
+    }) {
       return AutocompletePackageIdsResponse(
         totalHits: totalHits,
         data: data.cast(),

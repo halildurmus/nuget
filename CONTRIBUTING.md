@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in contributing to **nuget**!
+Thank you for your interest in contributing to `package:nuget`!
 
 This guide provides everything you need to get started and make your
 contributions effective and rewarding.
@@ -22,9 +22,10 @@ We strive to maintain a welcoming and inclusive community, so please read our
 - **🐛 Report Bugs**: Found a bug? Let us know on our [GitHub Issues] page.
 - **📝 Improve Documentation**: High-quality documentation is crucial. Help us
   improve it by refining the existing docs or adding new content.
-- **💬 Give Feedback**: Share your experience using **nuget**, what features
-  you’d like, and what works well on [GitHub Discussions].
-- **📢 Share nuget**: Spread the word about this project to reach more users.
+- **💬 Give Feedback**: Share your experience using `package:nuget`, what
+  features you'd like, and what works well on [GitHub Discussions].
+- **📢 Share `package:nuget`**: Spread the word about this project to reach more
+  users.
 - **💻 Contribute to the Codebase**: Work on new features or tackle
   [open issues][GitHub Issues] — all contributions are highly appreciated!
 
@@ -32,7 +33,7 @@ We strive to maintain a welcoming and inclusive community, so please read our
 
 ### ⚙️ Requirements
 
-- [Dart](https://dart.dev) version `3.5` or higher
+- [Dart](https://dart.dev) version `3.11` or higher
 - [git-cliff](https://git-cliff.org) for generating changelogs
 - [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
 
@@ -41,7 +42,7 @@ set up the project.
 
 ### 📥 Cloning the Repository
 
-Clone your fork of **nuget** to your local machine:
+Clone your fork of the `package:nuget` to your local machine:
 
 ```cmd
 git clone https://github.com/<your-username>/nuget.git
@@ -69,13 +70,13 @@ before commits.
 
 ### ✅ Running Tests
 
-To run tests for **nuget**, use:
+To run tests for the `package:win32_registry`, use:
 
 ```cmd
 dart test
 ```
 
-_We require tests for each feature or bug fix. If you’re unsure how to write_
+_We require tests for each feature or bug fix. If you're unsure how to write_
 _tests for your changes, feel free to ask on the relevant GitHub issue page._
 
 ## 🚀 Committing Your Work and Preparing a Pull Request
@@ -127,7 +128,7 @@ automatically, and our maintainers will review it.
 Please use the pull request template to provide details about your changes,
 ensuring a smoother review process.
 
-Thank you for contributing to **nuget**! 🎉
+Thank you for contributing to `package:nuget`! 🎉
 
 [Code of Conduct]: https://github.com/halildurmus/nuget/blob/main/CODE_OF_CONDUCT.md
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/

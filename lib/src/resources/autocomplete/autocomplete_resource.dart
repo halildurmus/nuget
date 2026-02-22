@@ -14,7 +14,7 @@ import 'models/autocomplete_package_ids_response.dart';
 /// https://learn.microsoft.com/nuget/api/search-autocomplete-service-resource
 final class AutocompleteResource extends NuGetResource {
   AutocompleteResource({required super.resourceUri, http.Client? httpClient})
-      : httpClient = httpClient ?? http.Client();
+    : httpClient = httpClient ?? http.Client();
 
   /// The underlying HTTP client used to make requests.
   final http.Client httpClient;
@@ -53,7 +53,7 @@ final class AutocompleteResource extends NuGetResource {
 
     final uri = resourceUri.replace(
       queryParameters: {
-        if (query != null) 'q': query,
+        'q': ?query,
         if (skip != null) 'skip': '$skip',
         if (take != null) 'take': '$take',
         'prerelease': '$includePrerelease',
@@ -63,12 +63,12 @@ final class AutocompleteResource extends NuGetResource {
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
       200 => AutocompletePackageIdsResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>,
-        ),
+        json.decode(response.body) as Map<String, dynamic>,
+      ),
       _ => throw NuGetServerException(
-          'Failed to get autocomplete package IDs results: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get autocomplete package IDs results: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 
@@ -98,13 +98,14 @@ final class AutocompleteResource extends NuGetResource {
     );
     final response = await httpClient.get(uri);
     return switch (response.statusCode) {
-      200 => ((json.decode(response.body) as Map<dynamic, dynamic>)['data']
-              as List<dynamic>)
-          .cast<String>(),
+      200 =>
+        ((json.decode(response.body) as Map<dynamic, dynamic>)['data']
+                as List<dynamic>)
+            .cast<String>(),
       _ => throw NuGetServerException(
-          'Failed to get autocomplete package versions results: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get autocomplete package versions results: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 }

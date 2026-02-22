@@ -13,16 +13,19 @@ void main() async {
       final ServiceIndexResponse(:reportAbuseResourceUri) =
           await serviceIndexResource.get();
       serviceIndexResource.close();
-      return resource =
-          ReportAbuseResource(resourceUri: reportAbuseResourceUri!);
-    });
-
-    test('getRegistrationIndex retrieves the registration index for a package',
-        () {
-      final url = resource.getReportAbuseUrl('Newtonsoft.Json', '13.0.3');
-      check(url.toString()).equals(
-        'https://www.nuget.org/packages/Newtonsoft.Json/13.0.3/ReportAbuse',
+      return resource = ReportAbuseResource(
+        resourceUri: reportAbuseResourceUri!,
       );
     });
+
+    test(
+      'getRegistrationIndex retrieves the registration index for a package',
+      () {
+        final url = resource.getReportAbuseUrl('Newtonsoft.Json', '13.0.3');
+        check(url.toString()).equals(
+          'https://www.nuget.org/packages/Newtonsoft.Json/13.0.3/ReportAbuse',
+        );
+      },
+    );
   });
 }

@@ -15,7 +15,7 @@ final class ServiceIndexResource extends NuGetResource {
   /// [resourceUri] defaults to [nugetOrgServiceIndex], which is the official
   /// `NuGet.org` service index.
   ServiceIndexResource({required super.resourceUri, http.Client? httpClient})
-      : httpClient = httpClient ?? http.Client();
+    : httpClient = httpClient ?? http.Client();
 
   /// The underlying HTTP client used to make requests.
   final http.Client httpClient;
@@ -24,8 +24,10 @@ final class ServiceIndexResource extends NuGetResource {
   void close() => httpClient.close();
 
   /// The official `NuGet.org` service index.
-  static final nugetOrgServiceIndex =
-      Uri.https('api.nuget.org', '/v3/index.json');
+  static final nugetOrgServiceIndex = Uri.https(
+    'api.nuget.org',
+    '/v3/index.json',
+  );
 
   /// Retrieves the resources available on the package feed defined in
   /// [resourceUri].
@@ -36,12 +38,12 @@ final class ServiceIndexResource extends NuGetResource {
     final response = await httpClient.get(resourceUri);
     return switch (response.statusCode) {
       200 => ServiceIndexResponse.fromJson(
-          json.decode(response.body) as Map<String, dynamic>,
-        ),
+        json.decode(response.body) as Map<String, dynamic>,
+      ),
       _ => throw NuGetServerException(
-          'Failed to get service index: '
-          '${response.statusCode} ${response.reasonPhrase}',
-        ),
+        'Failed to get service index: '
+        '${response.statusCode} ${response.reasonPhrase}',
+      ),
     };
   }
 }

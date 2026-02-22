@@ -39,12 +39,12 @@ void main() {
             'summary': '',
             'tags': [''],
             'title': '',
-            'version': '0.1.6'
+            'version': '0.1.6',
           },
           'packageContent':
               'https://api.nuget.org/v3-flatcontainer/serilog/0.1.6/serilog.0.1.6.nupkg',
           'registration':
-              'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json'
+              'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json',
         },
         {
           '@id':
@@ -74,13 +74,13 @@ void main() {
             'summary': '',
             'tags': [''],
             'title': '',
-            'version': '0.1.7'
+            'version': '0.1.7',
           },
           'packageContent':
               'https://api.nuget.org/v3-flatcontainer/serilog/0.1.7/serilog.0.1.7.nupkg',
           'registration':
-              'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json'
-        }
+              'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json',
+        },
       ],
       'parent':
           'https://api.nuget.org/v3/registration5-gz-semver2/serilog/index.json',
@@ -92,7 +92,8 @@ void main() {
       final page = RegistrationIndexPage.fromJson(json);
       check(page)
         ..has((e) => e.registrationPageUrl, 'registrationPageUrl').equals(
-            'https://api.nuget.org/v3/registration5-gz-semver2/serilog/page/0.1.6/1.2.47.json')
+          'https://api.nuget.org/v3/registration5-gz-semver2/serilog/page/0.1.6/1.2.47.json',
+        )
         ..has((e) => e.count, 'count').equals(2)
         ..has((e) => e.items, 'items').isNotNull()
         ..has((e) => e.lower, 'lower').equals('0.1.6')
